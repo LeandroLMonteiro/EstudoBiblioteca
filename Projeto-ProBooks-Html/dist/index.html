@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pro-Books</title>
+    <link rel="stylesheet" href="css/app.css" type="text/css" />
+</head>
+<body>
+    <header class="topo container-padding flex">
+        <img src="images/Yduqs.png" alt="Yduqs - Pro-Books">
+        <div class="usuario flex">
+            <span>Usuário Pro-Books</span>
+            <img src="images/avatar.svg" alt="Usuario Teste" />
+        </div>
+    </header>
+    <main class="container-padding flex">
+        <nav class="menu">
+            <a href="#" class="active">Início</a>
+            <a href="#">Cadastro Autor</a>
+            <a href="#">Cadastro Livros</a>
+            <a href="#">Outros</a>
+        </nav>
+
+        <div class="coluna-central">
+            <section class="block-novo-autor">
+                <h2>Cadastro Autor</h2>
+                <form action="" method="post" novalidate>
+                    <div class="campo">
+                        <label for="nome">Nome Autor:</label><br>
+                        <input type="text" name="nome" id="nome" class="campo-input" placeholder="" required />
+                    </div>
+                    <div class="campo">
+                        <label for="email">Email:</label><br>
+                        <input type="email" name="email" id="email" class="campo-input" placeholder="" required />
+                    </div>
+                    <div class="campo">
+                        <label for="biografia">Biografia:</label><br>
+                        <input type="text" name="biografia" id="biografia" class="campo-input" placeholder="" required />
+                    </div>
+                    <div class="campo">
+                        <button type="submit" class="btn">
+                            Criar Autor
+                        </button>
+                    </div>
+                </form>
+            </section>
+        </div>
+        <aside class="listaAutor">
+            <h3>Autores</h3>
+            <div class="registro-autor">
+                <div class="autor-group">
+                    <div class="autor-item">
+                        <div class="autor-info">
+                            <span class="nome">teste</span><br>
+                            <span class="email">teste@teste.com</span><br>
+                            <span class="biografia">biografia</span><br>
+                        </div>
+                        <time class="data">04/09</time>
+                    </div>
+                    <div class="autor-item">
+                        <div class="autor-info">
+                            <span class="nome">teste2</span><br>
+                            <span class="email">teste@teste.com</span><br>
+                            <span class="biografia">biografia</span><br>
+                        </div>
+                        <time class="data">05/09</time>
+                    </div>                    
+                </div>
+            </div>
+        </aside>
+    </main>
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
