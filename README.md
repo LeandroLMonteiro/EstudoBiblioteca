@@ -1,2 +1,0 @@
-# EstudoBiblioteca
-Apenas para estudo
