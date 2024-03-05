@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-import { z } from "zod/index";
-=======
 import { z } from "zod";
->>>>>>> 7803ba9 (subida final)
-
 export const autorSchema = z.object({
   nome: z.string({
       required_error: "Nome deve ser informado"}).trim().min(1,{message: "Nome não pode ser vazio"}),

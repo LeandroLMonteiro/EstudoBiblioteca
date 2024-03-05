@@ -1,12 +1,20 @@
 {
   "compilerOptions": {
+    "lib": [
+      "ES2022",
+      "DOM"
+    ],
     "target": "ES2022",
     "outDir": "./dist/js/",
     "noEmitOnError": true,
     "moduleResolution": "node",
     "paths": {
-      "*": ["./node_modules/*", "./nodenext/*"]
-    }
+      "*": ["./node_modules/*", 
+            "./nodenext/*",
+            "./node_modules/zod/*"
+          ]
+    },
+    "strict": false
   },
   "include": [
     "./src/**/*"
