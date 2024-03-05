@@ -1,4 +1,4 @@
-import { z } from "zod/index";
+import { z } from "zod";
 export const autorSchema = z.object({
     nome: z.string({
         required_error: "Nome deve ser informado"
