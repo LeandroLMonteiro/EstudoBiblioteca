@@ -1,7 +1,7 @@
-import Autores from "../repositorio/autor_repositorio.js";
-import { Autor } from "../types/Autor.js";
+import { Autores } from "../repositorio/autor_repositorio.js";
+import { autorSchema } from "../types/Autor.js";
 
+export function listaAutores(): typeof autorSchema[] {
 
-export function listaAutores(): Autor[] {
     return Autores.listarTodos();
 }

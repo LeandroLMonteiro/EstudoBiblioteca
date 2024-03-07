@@ -1,9 +1,11 @@
-import { Autor } from "../types/Autor"
 
-const autores: Autor[] = []
+import { autorSchema } from "../types/Autor.js"
 
-const Autores = {
-    salvar(novoAutor: Autor) {
+const autores: typeof autorSchema[] = [];
+
+export const Autores = {
+    salvar(novoAutor: typeof autorSchema) {
+
         
         autores.push(novoAutor);
         
@@ -17,7 +19,11 @@ const Autores = {
 
     validaEmailExistente(email: string): boolean {
         return autores.some(autor => autor.email === email);
-    }
-}
 
-export default Autores;
+    },
+
+    validaAutorPeloNome(nome: string): boolean {
+        return autores.some(autor => autor.nome === nome);
+    }
+
+}

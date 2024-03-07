@@ -1,5 +1,6 @@
-import Autores from "../repositorio/autor_repositorio.js";
-import { Autor, autorSchema } from "../types/Autor.js";
+import { Autores } from "../repositorio/autor_repositorio.js";
+import { autorSchema } from "../types/Autor.js";
+import { Erro } from "../types/Error.js";
 
 type CreateAutorInput = {
     nome: string;
@@ -7,17 +8,10 @@ type CreateAutorInput = {
     biografia: string;
 };
 
-type Error = {
-    property: string;
-    message: string;
-}
-
 type CreateAutorOutput = {
     success: boolean;
-    autor: Autor | null;
-    erros: Error[] | null;
-}
-
+    autor: typeof autorSchema | null;
+    erros: Erro[] | null;
 
 export function cadastraAutor(data: CreateAutorInput): CreateAutorOutput {
 
@@ -34,18 +28,8 @@ export function cadastraAutor(data: CreateAutorInput): CreateAutorOutput {
         }
     }
 
-    if(Autores.validaEmailExistente(result.data.email)){
-        return {
-            success: false,
-            autor: null,
-            erros: [{
-                property: "Chave Duplicada",
-                message: "Email já existente",
-            }]
-        }
-    }
- 
-    const novoAutor: Autor = {
+    const novoAutor: typeof autorSchema = {
+
         ...result.data,
         data: new Date(),
     };
