@@ -8,13 +8,10 @@ type CreateAutorInput = {
     biografia: string;
 };
 
-
 type CreateAutorOutput = {
     success: boolean;
     autor: typeof autorSchema | null;
     erros: Erro[] | null;
-}
-
 
 export function cadastraAutor(data: CreateAutorInput): CreateAutorOutput {
 
@@ -32,6 +29,7 @@ export function cadastraAutor(data: CreateAutorInput): CreateAutorOutput {
     }
 
     const novoAutor: typeof autorSchema = {
+
         ...result.data,
         data: new Date(),
     };
