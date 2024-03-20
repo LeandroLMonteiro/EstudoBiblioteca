@@ -42,3 +42,14 @@ export const livroSchema = z.object({
         }
 
     });
+
+    export type Livro = {
+        titulo: string,
+        resumo: string,
+        sumario: string,
+        preco: number,
+        num_pagina: number,
+        isbn: number,
+        data: Date,
+        autor: string
+        };
