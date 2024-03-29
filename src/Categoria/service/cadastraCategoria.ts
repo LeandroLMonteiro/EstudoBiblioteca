@@ -1,45 +1,27 @@
-import { Categorias } from "../repository/categoria_repositorio.js";
-import { categoriaSchema } from "../entity/Categoria.js";
-import { Erro } from "../../types/Error.js";
-import slugify from 'slugify';
+import { Injectable } from "@nestjs/common";
+import { CategoriaRepository } from "../repository/categoria_repositorio";
+import { CategoriaDTO } from "../dto/categoriaDTO";
 
-type CreateCategoriaInput = {
-    categoria: string;
-};
 
-type CreateCategoriaOutput = {
-    success: boolean;
-    categoria: typeof categoriaSchema | null;
-    erros: Erro | null;
-}
+@Injectable()
+export class CategoriaService {
 
-export function cadastraCategoria(data: CreateCategoriaInput): CreateCategoriaOutput {
-    const result = categoriaSchema.safeParse(data);
+    constructor (
+        private readonly categorias: CategoriaRepository
+    ){}
 
-    if(!result.success) {
-        return {
-            success: false,
-            categoria: null,
-            erros: result.error.errors.map(error => ({
-                property: error.path.toString(),
-                message: error.message,
-            }))
-        }
-    }   
-    
-  const slug = slugify(result.data.categoria.toString(), {lower: true});
-  
-    const novaCategoria = {
-        ...result.data,
-        slug
-    } ;
+    cadastraCategoria(data: CategoriaDTO) {
+     
+        this.categorias.salvar(data);
+          
+    }
 
-    Categorias.salvar(novaCategoria);
-    
-    return {
-        success: true,
-        categoria: novaCategoria,
-        erros: null,
-    };
+    listaCategoria(): CategoriaDTO[]{
+        return this.categorias.listarTodos() as CategoriaDTO[]
+    }
+
+    removeCategoria(data: string) {    
+        return this.categorias.remover(data);
+    }
 
 }

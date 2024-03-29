@@ -1,6 +1,7 @@
-import { Optional } from "@nestjs/common";
+import { Injectable, Optional } from "@nestjs/common";
 import { IsInt, IsString, MinLength } from "class-validator";
 
+@Injectable()
 export class EnderecoDTO {
     
     @IsString()

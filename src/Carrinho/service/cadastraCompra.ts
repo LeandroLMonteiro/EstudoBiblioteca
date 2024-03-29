@@ -1,53 +1,35 @@
-import { Compras } from "../repository/compra_repositorio.js";
-import { Compra } from "../entity/Compra.js";
-import { Erro } from "../../types/Error.js";
-import { Carrinho } from "../componentes/criaCarrinho.js";
-import { FormaPagamento } from "../FormaPagamento.js";
+import { Injectable } from "@nestjs/common";
+import { FormaPagamento } from "../FormaPagamento";
+import { CarrinhoDTO } from "../dto/carrinhoDTO";
+import { CompraEntity } from "../entity/Compra";
+import { CompraRepositorio } from "../repository/compra_repositorio";
 
-type CriaCompraOutput = {
-    success: boolean;
-    compra: Compra  | null;
-    erros: Erro[] | null;
-}
-
-function verificaParcelas (formaPagamento: FormaPagamento, parcelas: number) : boolean {
-    return (formaPagamento == FormaPagamento.D && parcelas == 1) || (formaPagamento == FormaPagamento.C && ((parcelas <= 12) || (parcelas >= 12)))
-}
-
-export function cadastraCompra(carrinho: Carrinho, formaPagamento: FormaPagamento, parcelas: number): CriaCompraOutput {
-
-    if (!verificaParcelas(formaPagamento,parcelas)){
-
-        return {
-            success: false,
-            compra: null,
-            erros: [{
-                property: "Valida Forma Pagamento",
-                message: "Parcela não confere com a forma de pagamento"
-            }]
+@Injectable()
+export class CadastraCompraService{
+    
+    constructor(
+        private readonly compraRepositorio: CompraRepositorio
+    ){}
+    
+    cadastraCompra(carrinho: CarrinhoDTO, formaPagamento: FormaPagamento, parcelas: number): CompraEntity {
+        
+        const novaCompra: CompraEntity = {
+            idUsuario: carrinho.idUsuario,
+            items: [],
+            total: carrinho.total,
+            formaPagamento: formaPagamento,
+            parcelas: parcelas,
+            valorParcela: formaPagamento==FormaPagamento.D ? carrinho.total : carrinho.total / parcelas,
+            dataCompra: new Date()
         }
-
-    }
     
-    const novaCompra: Compra = {
-        idUsuario: carrinho.idUsuario,
-        items: [],
-        total: carrinho.total,
-        formaPagamento: formaPagamento,
-        parcelas: parcelas,
-        valorParcela: formaPagamento==FormaPagamento.D ? carrinho.total : carrinho.total / parcelas,
-        dataCompra: new Date()
+        carrinho.items.forEach(element => {
+            novaCompra.items.push(element.item)
+        });
+    
+        this.compraRepositorio.salvar(novaCompra);
+
+        return novaCompra;
     }
 
-    carrinho.items.forEach(element => {
-        novaCompra.items.push(element.item)
-    });
-
-    Compras.salvar(novaCompra);
-    
-    return {
-        success: true,
-        compra: novaCompra,
-        erros: null,
-    };
 }

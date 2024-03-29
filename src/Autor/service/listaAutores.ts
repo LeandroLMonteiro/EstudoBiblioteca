@@ -1,6 +1,6 @@
-import { AutorEntity } from "../entity/Autor.js";
+import { AutorEntity } from "../entity/Autor";
 import { Injectable } from '@nestjs/common';
-import { AutorRepositorio } from "../repository/autor_repositorio.js";
+import { AutorRepositorio } from "../repository/autor_repositorio";
 
 
 @Injectable()

@@ -1,50 +1,23 @@
-import { Livros } from "../repository/livro_repositorio.js";
-import { Erro } from "../../types/Error.js";
-import { livroSchema } from "../entity/Livro.js";
+import { LivroRepository } from "../repository/livro_repositorio.js";
+import { LivroEntity } from "../entity/Livro.js";
+import { LivroDTO } from "../dto/livroDTO.js";
+import { Injectable } from "@nestjs/common";
 
-type CreateLivroInput = {
-    titulo: string,
-    resumo: string,
-    sumario: string,
-    preco: number,
-    num_pagina: number,
-    isbn: number,
-    categoria: string,
-    autor: string,
-    data: Date
-};
+@Injectable()
+export class CadastraLivroServices {
 
-type CreatelivroOutput = {
-    success: boolean;
-    livro: typeof livroSchema | null;
-    erros: Erro[] | null;
-}
-
-
-export function cadastraLivro(data: CreateLivroInput): CreatelivroOutput {
-
-    const result = livroSchema.safeParse(data);
-
-    if(!result.success) {
-        return {
-            success: false,
-            livro: null,
-            erros: result.error.errors.map(error => ({
-                property: error.path.toString(),
-                message: error.message,
-            }))
-        }
-    }
- 
-    const novolivro: typeof livroSchema = {
-        ...result.data
-    };
-
-    Livros.salvar(novolivro);
+    constructor (
+        private livroRepository: LivroRepository
+    ) {}
     
-    return {
-        success: true,
-        livro: novolivro,
-        erros: null,
-    };
+
+    cadastraLivro(data: LivroDTO): LivroEntity {
+        const novoLivro: LivroEntity = data
+    
+        this.livroRepository.salvar(novoLivro);
+
+        return novoLivro
+        
+    }
 }
+

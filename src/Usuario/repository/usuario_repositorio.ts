@@ -1,19 +1,22 @@
-import { Usuario } from "../entity/usuario.js";
+import { Injectable } from "@nestjs/common";
+import { UsuarioEntity } from "../entity/usuario";
 
+@Injectable()
+export class UsuarioRepository{
 
-const usuarios: Usuario[] = [];
+    private usuario: UsuarioEntity[] = []
 
-export const Usuarios = {
-    salvar(novoUsuario: Usuario) {
+    salvar(novoUsuario: UsuarioEntity) {
         
-        usuarios.push(novoUsuario);
-        
-    },
-
-    listarTodos() {
-
-        return usuarios;
+        this.usuario.push(novoUsuario);
         
     }
-
+    
+    listarTodos() {
+    
+        return this.usuario;
+        
+    }
 }
+
+
