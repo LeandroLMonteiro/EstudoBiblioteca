@@ -1,22 +1,32 @@
-import { livroSchema } from "../entity/Livro.js"
+import { Injectable } from "@nestjs/common";
+import { LivroEntity } from "../entity/Livro"
+import slugify from "slugify";
 
-const livros: typeof livroSchema[] = []
-
-export const Livros = {
-    salvar(novoLivro: typeof livroSchema) {
+@Injectable()
+export class LivroRepository{
+    
+    private livros: LivroEntity[] = []
+    
+    salvar(novoLivro: LivroEntity) {
         
-        livros.push(novoLivro);
+        this.livros.push(novoLivro);
         
-    },
-
+    }
+    
     listarTodos() {
-
-        return livros;
+    
+        return this.livros;
         
-    },
+    }
+    
+    validaIsbnExistente(isbn: string): boolean {
+        return this.livros.some(livro => livro.isbn === isbn);
+    }
 
-    validaIsbnExistente(isbn: number): boolean {
-        return livros.some(livro => livro.isbn === isbn);
+    verificaPrecoCategoria(preco: number, categoria: string) {    
+        const categoriaLivreDistribuicao  = slugify(categoria) === 'Livre-Distribuicao';
+        return (((preco != 0) || (categoriaLivreDistribuicao && preco == 0)))
     }
 
 }
+

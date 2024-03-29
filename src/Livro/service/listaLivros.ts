@@ -1,7 +1,18 @@
-import { Livros } from "../repository/livro_repositorio.js";
-import { livroSchema } from "../entity/Livro.js";
+import { LivroRepository } from "../repository/livro_repositorio.js";
+import { LivroEntity } from "../entity/Livro.js";
+import { Injectable } from "@nestjs/common";
 
+@Injectable()
+export class ListaLivroServices {
 
-export function listarLivros(): typeof livroSchema[] {
-    return Livros.listarTodos();
+    constructor (
+        private livroRepository: LivroRepository
+    ) {}
+    
+
+    listarLivros(): LivroEntity[] {
+            
+        return this.livroRepository.listarTodos();
+        
+    }
 }

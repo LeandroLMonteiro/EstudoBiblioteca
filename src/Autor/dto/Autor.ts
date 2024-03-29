@@ -1,4 +1,4 @@
-import { IsDate, IsEmail, IsNotEmpty, IsString, MaxLength, MinLength } from "class-validator";
+import { IsEmail, IsNotEmpty, IsString, MaxLength, MinLength } from "class-validator";
 import { EmailNotExiste } from "../decorators/email-existente";
 
 export class CriaAutorDTO {

@@ -1,9 +1,9 @@
-import { Livro } from "../../Livro/entity/Livro.js";
-import { FormaPagamento } from "../FormaPagamento.js";
+import { LivroDTO } from "src/Livro/dto/livroDTO";
+import { FormaPagamento } from "../FormaPagamento";
 
-export type Compra = {
+export type CompraEntity = {
     idUsuario: string,
-    items: Livro[],
+    items: LivroDTO[],
     total: number,
     formaPagamento: FormaPagamento,
     parcelas: number,

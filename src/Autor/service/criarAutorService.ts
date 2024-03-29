@@ -1,8 +1,8 @@
 import { Injectable } from "@nestjs/common";
-import { AutorEntity } from "../entity/Autor.js";
+import { AutorEntity } from "../entity/Autor";
 import { randomUUID } from "crypto";
-import { AutorRepositorio } from "../repository/autor_repositorio.js";
-import { CriaAutorDTO } from "../dto/Autor.js";
+import { AutorRepositorio } from "../repository/autor_repositorio";
+import { CriaAutorDTO } from "../dto/Autor";
 
 @Injectable()
 export class CriarAutorService {

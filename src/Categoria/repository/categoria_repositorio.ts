@@ -1,23 +1,36 @@
-import { categoriaSchema } from "../entity/Categoria.js";
-import slugify from 'slugify';
+import slugify from "slugify";
+import { CategoriaEntity } from "../entity/Categoria";
+import { Injectable } from "@nestjs/common";
 
-const categorias: typeof categoriaSchema[] = [];
+@Injectable()
+export class CategoriaRepository {
 
-export const Categorias = { 
-    salvar(novaCategoria: typeof categoriaSchema) {
-        
-        categorias.push(novaCategoria);
-        
-    },
+    private categorias: CategoriaEntity[] = []
 
+    salvar(novaCategoria: CategoriaEntity) {
+            if (!this.validaCategoriaExistente(novaCategoria.categoria))
+                this.categorias.push(novaCategoria);
+            
+        }
+    
     listarTodos() {
-
-        return categorias;
-        
-    },
-
-    validaCategoriaExistente(textoCategoria: string): boolean {
-        return categorias.some(categoria => slugify(categoria.categoria, {lower: true}) === slugify(textoCategoria, {lower: true}));
+    
+            return this.categorias;
+            
+        }
+    
+    remover(categoria: string){
+        const cat = this.categorias.filter(categorias => slugify(categorias.categoria, {lower: true}) !== slugify(categoria, {lower: true}));
+        this.categorias.map(cat => {cat})
+        return this.categorias; 
     }
 
+    encontraCategoria (textoCategoria: string) {
+        return this.categorias.find(categorias => slugify(categorias.categoria, {lower: true}) === slugify(textoCategoria, {lower: true}));
+    }
+
+    private validaCategoriaExistente(textoCategoria: string): boolean {
+            return this.categorias.some(categorias => slugify(categorias.categoria, {lower: true}) === slugify(textoCategoria, {lower: true}));
+        }
+    
 }
