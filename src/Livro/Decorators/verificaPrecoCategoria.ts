@@ -10,7 +10,7 @@ export class ValidaPrecoCategoria
     ) {}
 
     validate(value: any, validationArguments?: ValidationArguments): boolean {
-        return this.livroRepositorio.verificaPrecoCategoria(validationArguments.object['categoria'],value);
+        return this.livroRepositorio.verificaPrecoCategoria(value,validationArguments.object['categoria']);
     }
 }
 

@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Param, Post } from "@nestjs/common";
+import { Body, Controller, Get, Post } from "@nestjs/common";
 import { CadastraLivroServices } from "../service/cadastraLivro";
 import { ListaLivroServices } from "../service/listaLivros";
 import { LivroDTO } from "../dto/livroDTO";
@@ -19,7 +19,7 @@ export class LivroController {
     }
 
     
-    @Delete('listaLivros')
+    @Get('listaLivros')
     listarLivros() {
         return this.livros.listarLivros();
     }
