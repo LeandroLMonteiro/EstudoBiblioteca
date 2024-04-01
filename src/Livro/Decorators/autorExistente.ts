@@ -10,7 +10,9 @@ export class AutorExiste {
     ) {}
 
     async validate(value: any, validationArguments?: ValidationArguments): Promise<boolean> {
-        return await this.autorRepository.validaAutorPeloNome(value)
+        const resultado =  await this.autorRepository.validaAutorPeloNome(value);
+        console.log(await this.autorRepository.listarTodos());
+        return resultado;
         
     }
 }

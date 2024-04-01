@@ -20,11 +20,11 @@ export class AutorRepositorio{
     }
     
     async validaEmailExistente(email: string): Promise<boolean> {
-        return this.autores.some(autor => autor.email === email);
+        return this.autores.some((autor) => autor.email === email);
     }
     
     async validaAutorPeloNome(nome: string): Promise<boolean> {
-        return this.autores.some(autor => autor.nome === nome);
+        return this.autores.some((autor) => autor.nome.trim().toUpperCase() === nome.trim().toUpperCase());
     }
 }
 

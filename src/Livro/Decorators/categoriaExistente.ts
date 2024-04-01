@@ -11,8 +11,7 @@ export class CategoriaExiste {
     ) {}
 
     validate(value: any, validationArguments?: ValidationArguments): boolean {
-        const CategoriaExiste = this.categoriaRepository.encontraCategoria(value);
-        return CategoriaExiste != null;
+        return this.categoriaRepository.validaCategoriaExistente(value);
     }
 }
 

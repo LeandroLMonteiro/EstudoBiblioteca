@@ -2,7 +2,6 @@ import { Injectable } from "@nestjs/common";
 import { CategoriaRepository } from "../repository/categoria_repositorio";
 import { CategoriaDTO } from "../dto/categoriaDTO";
 
-
 @Injectable()
 export class CategoriaService {
 
@@ -11,8 +10,8 @@ export class CategoriaService {
     ){}
 
     cadastraCategoria(data: CategoriaDTO) {
-     
-        this.categorias.salvar(data);
+        
+        return this.categorias.salvar(data);
           
     }
 
