@@ -3,6 +3,7 @@ import { CategoriaController } from './controller/categoria.controller';
 import { CategoriaRepository } from './repository/categoria_repositorio';
 import { CategoriaService } from './service/cadastraCategoria';
 import { CategoriaDTO } from './dto/categoriaDTO';
+import { ValidadorCategoriaServices } from './service/validadorCategoria.sevices';
 
 
 @Module({
@@ -11,7 +12,9 @@ import { CategoriaDTO } from './dto/categoriaDTO';
   providers: [
     CategoriaService,
     CategoriaRepository,
-    CategoriaDTO  
+    CategoriaDTO,
+    ValidadorCategoriaServices
   ],
+  exports: [ValidadorCategoriaServices]
 })
 export class CategoriaModule {}

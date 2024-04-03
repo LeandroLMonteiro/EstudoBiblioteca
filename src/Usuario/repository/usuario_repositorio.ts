@@ -1,5 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { UsuarioEntity } from "../entity/usuario";
+import { UUID } from "crypto";
 
 @Injectable()
 export class UsuarioRepository{
@@ -16,6 +17,10 @@ export class UsuarioRepository{
     
         return this.usuario;
         
+    }
+
+    usuarioExiste(id: UUID):boolean {
+        return this.usuario.some((usuario) => {usuario.id === id})
     }
 }
 

@@ -1,17 +1,16 @@
 import { ValidationArguments, ValidationOptions, ValidatorConstraint, registerDecorator } from "class-validator";
 import { Injectable } from "@nestjs/common";
-import { AutorRepositorio } from "src/Autor/repository/autor_repositorio";
+import { ValidarAutorService } from "src/Autor/service/validadoresAutor.service";
 
 @Injectable()
 @ValidatorConstraint({async: true})
 export class AutorExiste {
     constructor(
-        private autorRepository: AutorRepositorio
+        private validaAutorService: ValidarAutorService
     ) {}
 
     async validate(value: any, validationArguments?: ValidationArguments): Promise<boolean> {
-        const resultado =  await this.autorRepository.validaAutorPeloNome(value);
-        console.log(await this.autorRepository.listarTodos());
+        const resultado =  await this.validaAutorService.validaAutorPeloNome(value);
         return resultado;
         
     }

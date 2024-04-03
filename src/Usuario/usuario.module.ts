@@ -4,6 +4,7 @@ import { CadastraUsuarioService } from './service/cadastraUsuario';
 import { UsuarioRepository } from './repository/usuario_repositorio';
 import { UsuarioDTO } from './dto/UsuarioDTO';
 import { EnderecoDTO } from './dto/EnderecoDTO';
+import { ValidaUsuarioService } from './service/validaUsuario.service';
 
 
 @Module({
@@ -13,7 +14,9 @@ import { EnderecoDTO } from './dto/EnderecoDTO';
     CadastraUsuarioService,
     UsuarioRepository,
     UsuarioDTO,
-    EnderecoDTO
+    EnderecoDTO,
+    ValidaUsuarioService
     ],
+  exports: [ValidaUsuarioService]
 })
 export class UsuarioModule {}

@@ -2,7 +2,6 @@ import { LivroRepository } from "../repository/livro_repositorio.js";
 import { LivroEntity } from "../entity/Livro.js";
 import { LivroDTO } from "../dto/livroDTO.js";
 import { Injectable } from "@nestjs/common";
-import { AutorRepositorio } from "src/Autor/repository/autor_repositorio.js";
 
 @Injectable()
 export class CadastraLivroServices {
