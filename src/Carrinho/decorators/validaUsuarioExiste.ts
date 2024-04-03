@@ -1,28 +1,29 @@
 import { ValidationArguments, ValidationOptions, ValidatorConstraint, registerDecorator } from "class-validator";
 import { Injectable } from "@nestjs/common";
-import { ValidadorCategoriaServices } from "src/Categoria/service/validadorCategoria.sevices";
-
+import { ValidaUsuarioService } from "src/Usuario/service/validaUsuario.service";
 
 @Injectable()
-@ValidatorConstraint({async: false})
-export class CategoriaExiste {
-    constructor(
-        private categoriaServices: ValidadorCategoriaServices
+@ValidatorConstraint()
+export class ValidaUsuario
+{    constructor(
+            private validaUsuarioService: ValidaUsuarioService
     ) {}
 
     validate(value: any, validationArguments?: ValidationArguments): boolean {
-        return this.categoriaServices.validaCategoriaExistente(value);
+        return this.validaUsuarioService.verificaUsuario(value);
     }
 }
 
-export const CategoriaExistente = (opcoesDeValidacao: ValidationOptions) => {
+export const validaUsuario = (opcoesDeValidacao: ValidationOptions) => {
     return (objeto: Object, propriedade: string) => {
         registerDecorator({
             target: objeto.constructor,
             propertyName: propriedade,
             options: opcoesDeValidacao,
             constraints: [],
-            validator: CategoriaExiste
+            validator: ValidaUsuario
         });
     }
 }
+
+

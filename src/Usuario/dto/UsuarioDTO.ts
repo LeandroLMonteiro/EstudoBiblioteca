@@ -1,6 +1,7 @@
 import { Injectable } from "@nestjs/common";
+import { IsEmail, IsPhoneNumber, IsString, ValidateNested } from "class-validator";
+import { Type } from "class-transformer";
 import { EnderecoDTO } from "./EnderecoDTO";
-import { IsEmail, IsPhoneNumber, IsString } from "class-validator";
 
 @Injectable()
 export class UsuarioDTO {
@@ -19,6 +20,8 @@ export class UsuarioDTO {
 
     @IsString()
     cpf: string;
-
+    
+    @ValidateNested()
+    @Type(() => EnderecoDTO)
     endereco: EnderecoDTO;
 }

@@ -4,6 +4,7 @@ import { CriarAutorService } from './service/criarAutorService';
 import { AutorRepositorio } from './repository/autor_repositorio';
 import { AutorController } from './controller/autor.controller';
 import { emailNotExistente } from './decorators/email-existente';
+import { ValidarAutorService } from './service/validadoresAutor.service';
 
 @Module({
   imports: [],
@@ -12,7 +13,9 @@ import { emailNotExistente } from './decorators/email-existente';
     ListarAutorService,
     CriarAutorService,
     AutorRepositorio,
-    emailNotExistente
+    emailNotExistente,
+    ValidarAutorService
   ],
+  exports: [ValidarAutorService]
 })
 export class AutorModule {}
