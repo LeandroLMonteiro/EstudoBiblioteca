@@ -9,8 +9,8 @@ export class ValidaUsuarioService {
         private usuarioRepositorio: UsuarioRepository
         ){}
         
-    verificaUsuario(usuarioId: UUID):boolean {
-        return this.usuarioRepositorio.usuarioExiste(usuarioId)
+    async verificaUsuario(usuarioId: UUID): Promise<boolean> {
+        return await this.usuarioRepositorio.usuarioExiste(usuarioId)
         
     }
         

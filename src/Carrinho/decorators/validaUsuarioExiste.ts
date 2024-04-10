@@ -3,14 +3,14 @@ import { Injectable } from "@nestjs/common";
 import { ValidaUsuarioService } from "src/Usuario/service/validaUsuario.service";
 
 @Injectable()
-@ValidatorConstraint()
+@ValidatorConstraint({async: true})
 export class ValidaUsuario
 {    constructor(
             private validaUsuarioService: ValidaUsuarioService
     ) {}
 
-    validate(value: any, validationArguments?: ValidationArguments): boolean {
-        return this.validaUsuarioService.verificaUsuario(value);
+    async validate(value: any, validationArguments?: ValidationArguments): Promise<boolean> {
+        return await this.validaUsuarioService.verificaUsuario(value);
     }
 }
 

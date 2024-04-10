@@ -12,7 +12,7 @@ export class CadastraUsuarioService {
         ){}
         
         
-    cadastraUsurario(input: UsuarioDTO): UsuarioEntity {
+    async cadastraUsurario(input: UsuarioDTO): Promise<UsuarioEntity> {
        
             const { primeiroNome, ultimoNome, ...rest } = input
         
@@ -22,7 +22,7 @@ export class CadastraUsuarioService {
                 ...rest
             };
         
-            this.usuarioRepositorio.salvar(novoUsuario);
+            await this.usuarioRepositorio.salvar(novoUsuario);
          
             return novoUsuario;
         };
