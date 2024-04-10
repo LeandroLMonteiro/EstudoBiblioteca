@@ -1,26 +1,33 @@
 import { Injectable } from "@nestjs/common";
 import { UsuarioEntity } from "../entity/usuario.entity";
 import { UUID } from "crypto";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
 
 @Injectable()
+
 export class UsuarioRepository{
 
-    private usuario: UsuarioEntity[] = []
+    constructor (
+        @InjectRepository(UsuarioEntity)
+        private readonly usuarioRepository: Repository<UsuarioEntity>
 
-    salvar(novoUsuario: UsuarioEntity) {
+    ) {}
+
+    async salvar(novoUsuario: UsuarioEntity) {
         
-        this.usuario.push(novoUsuario);
+        await this.usuarioRepository.save(novoUsuario);
         
     }
     
-    listarTodos() {
+    async listarTodos() {
     
-        return this.usuario;
+        return await this.usuarioRepository.find();
         
     }
 
-    usuarioExiste(id: UUID):boolean {
-        return this.usuario.some((usuario) => {usuario.id === id})
+    async usuarioExiste(id: UUID):Promise<boolean> {
+        return !!await this.usuarioRepository.findOne({where:{id}})
     }
 }
 
