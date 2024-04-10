@@ -11,7 +11,7 @@ export class IsbnNaoExiste {
 
     validate(value: any, validationArguments?: ValidationArguments): boolean {
         const isbnExiste = this.livroRepository.validaIsbnExistente(value);
-        return !isbnExiste;
+        return !!isbnExiste;
     }
 }
 

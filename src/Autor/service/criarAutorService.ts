@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { AutorEntity } from "../entity/Autor";
+import { AutorEntity } from "../entity/autor.entity";
 import { randomUUID } from "crypto";
 import { AutorRepositorio } from "../repository/autor_repositorio";
 import { CriaAutorDTO } from "../dto/Autor";

@@ -1,10 +1,11 @@
 import { Injectable } from "@nestjs/common";
-import { IsISBN, IsInt, IsNumber, IsString, MaxLength, Min, MinDate, MinLength } from "class-validator";
-import { Transform } from 'class-transformer';
+import { IsISBN, IsInt, IsNumber, IsString, MaxLength, Min, MinDate, MinLength  } from "class-validator";
+import { Transform, Type } from 'class-transformer';
 import { IsbnNaoExistente } from "../Decorators/validaIsbnExistente";
 import { CategoriaExistente } from "../Decorators/categoriaExistente";
 import { AutorExistente } from "../Decorators/autorExistente";
 import { validaPreco } from "../Decorators/verificaPrecoCategoria";
+
 
 
 @Injectable()
@@ -42,7 +43,7 @@ export class LivroDTO {
     categoria: string;
 
     @AutorExistente({message: 'Autor inexistente'})
-    autor: string;
+    autorNome: string;
 
 }
 

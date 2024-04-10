@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { UsuarioEntity } from "../entity/usuario";
+import { UsuarioEntity } from "../entity/usuario.entity";
 import { UUID } from "crypto";
 
 @Injectable()

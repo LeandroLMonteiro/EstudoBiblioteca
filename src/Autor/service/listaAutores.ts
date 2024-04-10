@@ -1,4 +1,4 @@
-import { AutorEntity } from "../entity/Autor";
+import { AutorEntity } from "../entity/autor.entity";
 import { Injectable } from '@nestjs/common';
 import { AutorRepositorio } from "../repository/autor_repositorio";
 
