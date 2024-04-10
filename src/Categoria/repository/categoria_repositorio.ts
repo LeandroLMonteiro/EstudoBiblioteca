@@ -1,36 +1,54 @@
 import slugify from "slugify";
-import { CategoriaEntity } from "../entity/Categoria";
 import { Injectable } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
+
+import { CategoriaEntity } from "../entity/categoria.entity";
 import { CategoriaDTO } from "../dto/categoriaDTO";
+
 
 @Injectable()
 export class CategoriaRepository {
 
-    private categorias: CategoriaEntity[] = [];
+    constructor (
+        @InjectRepository(CategoriaEntity)
+        private readonly categoriaRepository: Repository<CategoriaEntity>
+    ) {}
 
-    salvar(novaCategoria: CategoriaDTO) {
-            const slug = slugify(novaCategoria.categoria, {lower: true})
+    async salvar(novaCategoria: CategoriaDTO) {
 
-            if (!this.validaCategoriaExistente(novaCategoria.categoria))
-                this.categorias.push({slug, ...novaCategoria});
-
-            return {slug, ...novaCategoria}
+        const slug = slugify(novaCategoria.categoria, {lower: true})
+        if (!await this.validaCategoriaExistente(novaCategoria.categoria)) {
+           await this.categoriaRepository.save({slug, ...novaCategoria} as CategoriaEntity);
+           return {slug, ...novaCategoria};
         }
+        else
+          return new(Error);
+        
+    }
     
-    listarTodos() {
+    async listarTodos() {
     
-            return this.categorias;
+        return await this.categoriaRepository.find();
             
-        }
+    }
     
-    remover(categoria: string){
-        const cat = this.categorias.filter(categorias => categorias.slug !== slugify(categoria, {lower: true}));
-        this.categorias.map(cat => {cat})
-        return this.categorias; 
+    async remover(categoria: string){
+        const slug = slugify(categoria, {lower: true})
+
+        if (await this.categoriaRepository.findOne({where: {slug}}))
+            await this.categoriaRepository.delete({slug});
+        
+        return await this.categoriaRepository.find();
     }
 
-    validaCategoriaExistente(textoCategoria: string): boolean {
-            return this.categorias.some((categorias) => categorias.slug === slugify(textoCategoria, {lower: true}));
-        }
-    
+    async validaCategoriaExistente(textoCategoria: string): Promise<boolean> {
+        const slug = slugify(textoCategoria, {lower: true});
+        return !!await this.categoriaRepository.findOne({where: {slug}});
+    }
+
+    async retornaSlugCategoria(textoCategoria: string){
+        const slug = slugify(textoCategoria, {lower: true});
+        return (await this.categoriaRepository.findOne({where: {slug}})).slug;
+    }
 }

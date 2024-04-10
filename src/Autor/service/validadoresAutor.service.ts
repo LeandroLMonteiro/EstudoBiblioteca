@@ -15,5 +15,9 @@ export class ValidarAutorService {
   async validaAutorPeloNome(nome: string): Promise<boolean> {
     return await this.autor.validaAutorPeloNome(nome);
 }
+  
+  async retornaAutorIdPeloNome(nome: string) {
+    return await this.autor.retornaAutorIdPeloNome(nome);
+  }
 
 }

@@ -1,32 +1,34 @@
 import { Injectable } from "@nestjs/common";
-import { LivroEntity } from "../entity/Livro"
-import slugify from "slugify";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
+
+import { LivroEntity } from "../entity/livro.entity"
+
 
 @Injectable()
 export class LivroRepository{
-    
-    private livros: LivroEntity[] = []
-    
-    salvar(novoLivro: LivroEntity) {
-        
-        this.livros.push(novoLivro);
-        
-    }
-    
-    listarTodos() {
-    
-        return this.livros;
-        
-    }
-    
-    validaIsbnExistente(isbn: string): boolean {
-        return this.livros.some(livro => livro.isbn === isbn);
-    }
 
-    verificaPrecoCategoria(preco: number, categoria: string) {    
-        const categoriaLivreDistribuicao  = slugify(categoria) === 'Livre-Distribuicao';
-        return (((preco != 0) || (categoriaLivreDistribuicao && preco == 0)))
+    constructor(
+        @InjectRepository(LivroEntity)
+        private readonly livroRepository: Repository<LivroEntity>
+    ){}
+    
+    async salvar(novoLivro: LivroEntity) {
+        
+        
+        return await this.livroRepository.save(novoLivro);
+        
     }
+    
+    async listarTodos() {
+    
+        return await this.livroRepository.find();
+        
+    }
+    
+    async validaIsbnExistente(isbn: string): Promise<boolean> {
+        return !!await this.livroRepository.findOne({where:{isbn}});
+    } 
 
 }
 

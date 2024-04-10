@@ -8,8 +8,13 @@ export class ValidadorCategoriaServices {
 
     ){}
 
-    validaCategoriaExistente(textoCategoria: string): boolean {
-            return this.categorias.validaCategoriaExistente(textoCategoria);
+    async validaCategoriaExistente(textoCategoria: string): Promise<boolean> {
+            return await this.categorias.validaCategoriaExistente(textoCategoria);
         }
+    
+    async retornaSlugCategoria(textoCategoria: string)
+    {
+        return await this.categorias.retornaSlugCategoria(textoCategoria);
+    }
     
 }

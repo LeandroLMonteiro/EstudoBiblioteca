@@ -1,5 +1,5 @@
 import { LivroRepository } from "../repository/livro_repositorio.js";
-import { LivroEntity } from "../entity/Livro.js";
+import { LivroEntity } from "../entity/livro.entity.js";
 import { Injectable } from "@nestjs/common";
 
 @Injectable()
@@ -10,9 +10,9 @@ export class ListaLivroServices {
     ) {}
     
 
-    listarLivros(): LivroEntity[] {
+    async listarLivros(): Promise<LivroEntity[]> {
             
-        return this.livroRepository.listarTodos();
+        return await this.livroRepository.listarTodos();
         
     }
 }

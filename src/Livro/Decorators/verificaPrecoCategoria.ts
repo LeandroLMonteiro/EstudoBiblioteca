@@ -1,16 +1,16 @@
 import { ValidationArguments, ValidationOptions, ValidatorConstraint, registerDecorator } from "class-validator";
 import { Injectable } from "@nestjs/common";
-import { LivroRepository } from "../repository/livro_repositorio";
+import { CadastraLivroServices } from "../service/cadastraLivro";
 
 @Injectable()
-@ValidatorConstraint()
+@ValidatorConstraint({async:true})
 export class ValidaPrecoCategoria
 {    constructor(
-            private livroRepositorio: LivroRepository
+            private livroService: CadastraLivroServices
     ) {}
 
-    validate(value: any, validationArguments?: ValidationArguments): boolean {
-        return this.livroRepositorio.verificaPrecoCategoria(value,validationArguments.object['categoria']);
+    async validate(value: any, validationArguments?: ValidationArguments) {
+        return await this.livroService.verificaPrecoCategoria(value, await validationArguments.object['categoria']);
     }
 }
 

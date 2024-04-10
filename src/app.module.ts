@@ -1,6 +1,9 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { PostgresConfigService } from './config/postgres.config.service';
+
 import { AutorModule } from './Autor/autor.module';
-import { CarrinhoModule } from './Carrinho/carrinho.module';
 import { LivroModule } from './Livro/livro.module';
 import { CategoriaModule } from './Categoria/categoria.module';
 import { UsuarioModule } from './Usuario/usuario.module';
@@ -10,8 +13,13 @@ import { UsuarioModule } from './Usuario/usuario.module';
     AutorModule,
     CategoriaModule,
     LivroModule,
-    UsuarioModule,
-    CarrinhoModule
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+    TypeOrmModule.forRootAsync({
+      useClass: PostgresConfigService,
+      inject: [PostgresConfigService],
+    }),
   ]
 })
 export class AppModule {}

@@ -15,7 +15,7 @@ export class CadastraCompraService{
         
         const novaCompra: CompraEntity = {
             idUsuario: carrinho.idUsuario,
-            items: [],
+            //items: [],
             total: carrinho.total,
             formaPagamento: formaPagamento,
             parcelas: parcelas,
@@ -23,9 +23,9 @@ export class CadastraCompraService{
             dataCompra: new Date()
         }
     
-        carrinho.items.forEach(element => {
+         /* carrinho.items.forEach(element => {
             novaCompra.items.push(element.item)
-        });
+        });  */
     
         this.compraRepositorio.salvar(novaCompra);
 

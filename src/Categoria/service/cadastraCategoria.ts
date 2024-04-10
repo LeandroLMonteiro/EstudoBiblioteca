@@ -9,18 +9,18 @@ export class CategoriaService {
         private readonly categorias: CategoriaRepository
     ){}
 
-    cadastraCategoria(data: CategoriaDTO) {
+    async cadastraCategoria(data: CategoriaDTO) {
         
-        return this.categorias.salvar(data);
+        return await this.categorias.salvar(data);
           
     }
 
-    listaCategoria(): CategoriaDTO[]{
-        return this.categorias.listarTodos() as CategoriaDTO[]
+    async listaCategoria(): Promise<CategoriaDTO[]>{
+        return await this.categorias.listarTodos() as CategoriaDTO[]
     }
 
-    removeCategoria(data: string) {    
-        return this.categorias.remover(data);
+    async removeCategoria(data: string) {    
+        return await this.categorias.remover(data);
     }
 
 }

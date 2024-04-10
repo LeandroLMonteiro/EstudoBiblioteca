@@ -1,6 +1,6 @@
 import { randomUUID } from "crypto";
 import { UsuarioDTO } from "../dto/UsuarioDTO";
-import { UsuarioEntity } from "../entity/usuario";
+import { UsuarioEntity } from "../entity/usuario.entity";
 import { UsuarioRepository } from "../repository/usuario_repositorio";
 import { Injectable } from "@nestjs/common";
 

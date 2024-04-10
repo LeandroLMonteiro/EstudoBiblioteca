@@ -1,9 +1,10 @@
 import { Injectable } from "@nestjs/common";
 import { Type } from "class-transformer";
 import { IsArray, IsInt, IsNumber, IsString, IsUUID, ValidateNested } from "class-validator";
-import { LivroEntity } from "src/Livro/entity/Livro";
 import { validaUsuario } from "../decorators/validaUsuarioExiste";
 import { UUID } from "crypto";
+import { LivroEntity } from "src/Livro/entity/livro.entity";
+
 
 Injectable()
 export class ItemDTO {
