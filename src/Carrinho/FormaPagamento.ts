@@ -1,4 +1,4 @@
 export enum FormaPagamento {
-    D = "Débito",
-    C = "Crédito"
+  D = 'Débito',
+  C = 'Crédito',
 }

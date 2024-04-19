@@ -1,10 +1,8 @@
-import { Injectable } from "@nestjs/common";
-import { IsString } from "class-validator";
+import { Injectable } from '@nestjs/common';
+import { IsString } from 'class-validator';
 
-Injectable()
+Injectable();
 export class CategoriaDTO {
-
-    @IsString()
-    categoria: string
-    };
-
+  @IsString()
+  categoria: string;
+}

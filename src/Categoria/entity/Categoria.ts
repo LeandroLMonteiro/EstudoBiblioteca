@@ -1,6 +1,4 @@
-
 export type CategoriaEntity = {
-    slug: string,
-    categoria: string
-    };
-
+  slug: string;
+  categoria: string;
+};

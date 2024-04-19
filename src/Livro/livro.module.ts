@@ -14,21 +14,22 @@ import { IsbnNaoExiste } from './Decorators/validaIsbnExistente';
 import { ValidaPrecoCategoria } from './Decorators/verificaPrecoCategoria';
 import { LivroEntity } from './entity/livro.entity';
 
-
 @Module({
-  imports: [TypeOrmModule.forFeature([LivroEntity]),
-    CategoriaModule, 
-    AutorModule
+  imports: [
+    TypeOrmModule.forFeature([LivroEntity]),
+    CategoriaModule,
+    AutorModule,
   ],
   controllers: [LivroController],
-  providers: [CadastraLivroServices,
+  providers: [
+    CadastraLivroServices,
     ListaLivroServices,
     LivroRepository,
     LivroDTO,
     AutorExiste,
     CategoriaExiste,
     IsbnNaoExiste,
-    ValidaPrecoCategoria
+    ValidaPrecoCategoria,
   ],
 })
 export class LivroModule {}

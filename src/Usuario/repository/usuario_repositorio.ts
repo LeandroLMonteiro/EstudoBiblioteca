@@ -1,34 +1,25 @@
-import { Injectable } from "@nestjs/common";
-import { UsuarioEntity } from "../entity/usuario.entity";
-import { UUID } from "crypto";
-import { InjectRepository } from "@nestjs/typeorm";
-import { Repository } from "typeorm";
+import { Injectable } from '@nestjs/common';
+import { UsuarioEntity } from '../entity/usuario.entity';
+import { UUID } from 'crypto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
 @Injectable()
+export class UsuarioRepository {
+  constructor(
+    @InjectRepository(UsuarioEntity)
+    private readonly usuarioRepository: Repository<UsuarioEntity>,
+  ) {}
 
-export class UsuarioRepository{
+  async salvar(novoUsuario: UsuarioEntity) {
+    await this.usuarioRepository.save(novoUsuario);
+  }
 
-    constructor (
-        @InjectRepository(UsuarioEntity)
-        private readonly usuarioRepository: Repository<UsuarioEntity>
+  async listarTodos() {
+    return await this.usuarioRepository.find();
+  }
 
-    ) {}
-
-    async salvar(novoUsuario: UsuarioEntity) {
-        
-        await this.usuarioRepository.save(novoUsuario);
-        
-    }
-    
-    async listarTodos() {
-    
-        return await this.usuarioRepository.find();
-        
-    }
-
-    async usuarioExiste(id: UUID):Promise<boolean> {
-        return !!await this.usuarioRepository.findOne({where:{id}})
-    }
+  async usuarioExiste(id: UUID): Promise<boolean> {
+    return !!(await this.usuarioRepository.findOne({ where: { id } }));
+  }
 }
-
-

@@ -7,7 +7,6 @@ import { ValidaUsuarioService } from './service/validaUsuario.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsuarioEntity } from './entity/usuario.entity';
 
-
 @Module({
   imports: [TypeOrmModule.forFeature([UsuarioEntity])],
   controllers: [UsuarioController],
@@ -15,8 +14,8 @@ import { UsuarioEntity } from './entity/usuario.entity';
     CadastraUsuarioService,
     UsuarioRepository,
     UsuarioDTO,
-    ValidaUsuarioService
-    ],
-  exports: [ValidaUsuarioService]
+    ValidaUsuarioService,
+  ],
+  exports: [ValidaUsuarioService],
 })
 export class UsuarioModule {}

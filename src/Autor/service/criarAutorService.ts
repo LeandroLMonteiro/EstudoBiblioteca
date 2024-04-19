@@ -1,32 +1,22 @@
-import { Injectable } from "@nestjs/common";
-import { AutorEntity } from "../entity/autor.entity";
-import { randomUUID } from "crypto";
-import { AutorRepositorio } from "../repository/autor_repositorio";
-import { CriaAutorDTO } from "../dto/Autor";
+import { Injectable } from '@nestjs/common';
+import { AutorEntity } from '../entity/autor.entity';
+import { randomUUID } from 'crypto';
+import { AutorRepositorio } from '../repository/autor_repositorio';
+import { CriaAutorDTO } from '../dto/Autor';
 
 @Injectable()
 export class CriarAutorService {
+  constructor(private readonly autorRepositorio: AutorRepositorio) {}
 
-    constructor(
-        private readonly autorRepositorio: AutorRepositorio
-    ){}
+  async cadastraAutor(data: CriaAutorDTO): Promise<AutorEntity> {
+    const novoAutor: AutorEntity = {
+      ...data,
+      dataCriacao: new Date(),
+      id: randomUUID(),
+    };
 
-    async cadastraAutor(data: CriaAutorDTO): Promise<AutorEntity> {
+    await this.autorRepositorio.salvar(novoAutor);
 
-        const novoAutor: AutorEntity = {
-            ...data,
-            dataCriacao: new Date(),
-            id: randomUUID()
-        };
-    
-        await this.autorRepositorio.salvar(novoAutor);
-        
-        return novoAutor;
-    }
-
+    return novoAutor;
+  }
 }
-
-
-
-
-

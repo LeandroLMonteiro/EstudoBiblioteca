@@ -17,8 +17,8 @@ import { AutorEntity } from './entity/autor.entity';
     CriarAutorService,
     AutorRepositorio,
     emailNotExistente,
-    ValidarAutorService
+    ValidarAutorService,
   ],
-  exports: [ValidarAutorService]
+  exports: [ValidarAutorService],
 })
 export class AutorModule {}

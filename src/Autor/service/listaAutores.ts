@@ -1,14 +1,10 @@
-import { AutorEntity } from "../entity/autor.entity";
+import { AutorEntity } from '../entity/autor.entity';
 import { Injectable } from '@nestjs/common';
-import { AutorRepositorio } from "../repository/autor_repositorio";
-
+import { AutorRepositorio } from '../repository/autor_repositorio';
 
 @Injectable()
 export class ListarAutorService {
-
-  constructor(
-    private readonly autorRepositorio: AutorRepositorio
-  ) {}
+  constructor(private readonly autorRepositorio: AutorRepositorio) {}
 
   async listarAutor(): Promise<AutorEntity[]> {
     return await this.autorRepositorio.listarTodos();
