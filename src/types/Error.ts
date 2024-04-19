@@ -1,4 +1,4 @@
 export type Erro = {
-    property: string;
-    message: string;
-}
+  property: string;
+  message: string;
+};

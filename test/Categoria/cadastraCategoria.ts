@@ -1,19 +1,21 @@
-import { cadastraCategoria } from "../src/componentes/cadastraCategoria.ts";
+import { cadastraCategoria } from '../src/componentes/cadastraCategoria.ts';
 
 (() => {
-    let resultado:{ success, categoria, erros} = cadastraCategoria({
-        categoria: 'teste1'});
-    
-    console.log('ok',resultado);
+  let resultado: { success; categoria; erros } = cadastraCategoria({
+    categoria: 'teste1',
+  });
 
-    resultado = cadastraCategoria({
-           categoria: 'teste'});
-        
-    console.log('ok',resultado);
+  console.log('ok', resultado);
 
-    resultado = cadastraCategoria({
-        categoria: 'teste'});
-     
-    console.log('nok',resultado);
+  resultado = cadastraCategoria({
+    categoria: 'teste',
+  });
 
+  console.log('ok', resultado);
+
+  resultado = cadastraCategoria({
+    categoria: 'teste',
+  });
+
+  console.log('nok', resultado);
 })();

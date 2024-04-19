@@ -10,7 +10,6 @@ import { CompraDTO } from './dto/compraDTO';
 import { ValidaUsuario } from './decorators/validaUsuarioExiste';
 import { UsuarioModule } from 'src/Usuario/usuario.module';
 
-
 @Module({
   imports: [LivroModule, UsuarioModule],
   controllers: [CarrinhoController],
@@ -21,7 +20,7 @@ import { UsuarioModule } from 'src/Usuario/usuario.module';
     CompraRepositorio,
     CarrinhoDTO,
     CompraDTO,
-    ValidaUsuario
+    ValidaUsuario,
   ],
 })
 export class CarrinhoModule {}

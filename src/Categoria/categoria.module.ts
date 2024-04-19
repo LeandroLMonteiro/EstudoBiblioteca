@@ -8,8 +8,6 @@ import { CategoriaService } from './service/cadastraCategoria';
 import { CategoriaDTO } from './dto/categoriaDTO';
 import { ValidadorCategoriaServices } from './service/validadorCategoria.sevices';
 
-
-
 @Module({
   imports: [TypeOrmModule.forFeature([CategoriaEntity])],
   controllers: [CategoriaController],
@@ -17,8 +15,8 @@ import { ValidadorCategoriaServices } from './service/validadorCategoria.sevices
     CategoriaService,
     CategoriaRepository,
     CategoriaDTO,
-    ValidadorCategoriaServices
+    ValidadorCategoriaServices,
   ],
-  exports: [ValidadorCategoriaServices]
+  exports: [ValidadorCategoriaServices],
 })
 export class CategoriaModule {}

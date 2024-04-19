@@ -20,6 +20,6 @@ import { UsuarioModule } from './Usuario/usuario.module';
       useClass: PostgresConfigService,
       inject: [PostgresConfigService],
     }),
-  ]
+  ],
 })
 export class AppModule {}
