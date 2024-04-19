@@ -1,5 +1,4 @@
 import {
-  ValidationArguments,
   ValidationOptions,
   ValidatorConstraint,
   registerDecorator,
@@ -12,17 +11,14 @@ import { Injectable } from '@nestjs/common';
 export class emailNotExistente {
   constructor(private autorRepository: AutorRepositorio) {}
 
-  async validate(
-    value: any,
-    validationArguments?: ValidationArguments,
-  ): Promise<boolean> {
+  async validate(value: any): Promise<boolean> {
     const autorExiste = await this.autorRepository.validaEmailExistente(value);
     return !autorExiste;
   }
 }
 
 export const EmailNotExiste = (opcoesDeValidacao: ValidationOptions) => {
-  return (objeto: Object, propriedade: string) => {
+  return (objeto: object, propriedade: string) => {
     registerDecorator({
       target: objeto.constructor,
       propertyName: propriedade,

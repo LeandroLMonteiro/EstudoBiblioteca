@@ -17,7 +17,11 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "migration:show": "ts-node -O \"{ \\\"module\\\": \\\"commonjs\\\" }\" -r tsconfig-paths/register node_modules/typeorm/cli.js migration:show --dataSource src/db/data-source-cli.ts",
+    "migration:generate": "ts-node -O \"{ \\\"module\\\": \\\"commonjs\\\" }\" -r tsconfig-paths/register node_modules/typeorm/cli.js migration:generate --dataSource src/db/data-source-cli.ts",
+    "migration:run": "ts-node -O \"{ \\\"module\\\": \\\"commonjs\\\" }\" -r tsconfig-paths/register node_modules/typeorm/cli.js migration:run --dataSource src/db/data-source-cli.ts",
+    "migration:revert": "ts-node -O \"{ \\\"module\\\": \\\"commonjs\\\" }\" -r tsconfig-paths/register node_modules/typeorm/cli.js migration:revert --dataSource src/db/data-source-cli.ts"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
@@ -27,6 +31,7 @@
     "@nestjs/typeorm": "^10.0.2",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
+    "dotenv": "^16.4.5",
     "pg": "^8.11.5",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1",
@@ -53,7 +58,7 @@
     "supertest": "^6.3.3",
     "ts-jest": "^29.1.0",
     "ts-loader": "^9.4.3",
-    "ts-node": "^10.9.1",
+    "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.1.3"
   },

@@ -6,7 +6,6 @@ import { PostgresConfigService } from './config/postgres.config.service';
 import { AutorModule } from './Autor/autor.module';
 import { LivroModule } from './Livro/livro.module';
 import { CategoriaModule } from './Categoria/categoria.module';
-import { UsuarioModule } from './Usuario/usuario.module';
 
 @Module({
   imports: [
