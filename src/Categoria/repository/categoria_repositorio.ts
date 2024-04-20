@@ -1,5 +1,9 @@
 import slugify from 'slugify';
-import { Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
@@ -21,7 +25,10 @@ export class CategoriaRepository {
         ...novaCategoria,
       } as CategoriaEntity);
       return { slug, ...novaCategoria };
-    } else return new Error();
+    } else
+      return new BadRequestException(
+        'Categoria já existe. Não foi possível o cadastro',
+      );
   }
 
   async listarTodos() {
@@ -31,8 +38,12 @@ export class CategoriaRepository {
   async remover(categoria: string) {
     const slug = slugify(categoria, { lower: true });
 
-    if (await this.categoriaRepository.findOne({ where: { slug } }))
+    if (await this.categoriaRepository.findOne({ where: { slug } })) {
       await this.categoriaRepository.delete({ slug });
+    } else
+      return new NotFoundException(
+        'Categoria não existe. Não foi possível remover',
+      );
 
     return await this.categoriaRepository.find();
   }
@@ -44,6 +55,12 @@ export class CategoriaRepository {
 
   async retornaSlugCategoria(textoCategoria: string) {
     const slug = slugify(textoCategoria, { lower: true });
-    return (await this.categoriaRepository.findOne({ where: { slug } })).slug;
+    const slugLocalizado = await this.categoriaRepository.findOne({
+      where: { slug },
+    });
+    if (slugLocalizado === null) {
+      throw new NotFoundException('Slug de Categoria não existe');
+    }
+    return slugLocalizado.slug;
   }
 }

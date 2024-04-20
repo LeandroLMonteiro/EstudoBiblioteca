@@ -5,7 +5,6 @@ import {
   IsPhoneNumber,
   IsString,
   MinLength,
-  ValidateNested,
 } from 'class-validator';
 
 @Injectable()

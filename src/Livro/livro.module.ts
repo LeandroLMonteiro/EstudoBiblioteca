@@ -10,7 +10,7 @@ import { CadastraLivroServices } from './service/cadastraLivro';
 import { LivroDTO } from './dto/livroDTO';
 import { AutorExiste } from './Decorators/autorExistente';
 import { CategoriaExiste } from './Decorators/categoriaExistente';
-import { IsbnNaoExiste } from './Decorators/validaIsbnExistente';
+import { IsbnExiste, IsbnNaoExiste } from './Decorators/validaIsbnExistente';
 import { ValidaPrecoCategoria } from './Decorators/verificaPrecoCategoria';
 import { LivroEntity } from './entity/livro.entity';
 
@@ -31,5 +31,6 @@ import { LivroEntity } from './entity/livro.entity';
     IsbnNaoExiste,
     ValidaPrecoCategoria,
   ],
+  exports: [IsbnNaoExiste, IsbnExiste, ListaLivroServices],
 })
 export class LivroModule {}

@@ -4,17 +4,17 @@ import {
   IsArray,
   IsInt,
   IsNumber,
-  IsString,
   IsUUID,
   ValidateNested,
 } from 'class-validator';
 import { validaUsuario } from '../decorators/validaUsuarioExiste';
 import { UUID } from 'crypto';
-import { LivroEntity } from 'src/Livro/entity/livro.entity';
+import { IsbnExistente } from 'src/Livro/Decorators/validaIsbnExistente';
 
 Injectable();
 export class ItemDTO {
-  item: LivroEntity;
+  @IsbnExistente({ message: 'ISBN não cadastrado' })
+  isbn: string;
 
   @IsInt()
   quantity: number;
@@ -25,6 +25,9 @@ export class ItemDTO {
 
 Injectable();
 export class CarrinhoDTO {
+  @IsUUID()
+  id: string;
+
   @IsUUID()
   @validaUsuario({ message: 'Usuario inexistente' })
   idUsuario: UUID;
