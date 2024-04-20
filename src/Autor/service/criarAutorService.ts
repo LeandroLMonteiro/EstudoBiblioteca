@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { AutorEntity } from '../entity/autor.entity';
-import { randomUUID } from 'crypto';
 import { AutorRepositorio } from '../repository/autor_repositorio';
 import { CriaAutorDTO } from '../dto/Autor';
 
@@ -9,14 +8,12 @@ export class CriarAutorService {
   constructor(private readonly autorRepositorio: AutorRepositorio) {}
 
   async cadastraAutor(data: CriaAutorDTO): Promise<AutorEntity> {
-    const novoAutor: AutorEntity = {
-      ...data,
-      dataCriacao: new Date(),
-      id: randomUUID(),
-    };
+    const autorEntity = new AutorEntity();
 
-    await this.autorRepositorio.salvar(novoAutor);
+    Object.assign(autorEntity, data as AutorEntity);
 
-    return novoAutor;
+    await this.autorRepositorio.salvar(autorEntity);
+
+    return autorEntity;
   }
 }

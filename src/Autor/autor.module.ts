@@ -8,9 +8,10 @@ import { AutorController } from './controller/autor.controller';
 import { emailNotExistente } from './decorators/email-existente';
 import { ValidarAutorService } from './service/validadoresAutor.service';
 import { AutorEntity } from './entity/autor.entity';
+import { LivroModule } from 'src/Livro/livro.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([AutorEntity])],
+  imports: [LivroModule, TypeOrmModule.forFeature([AutorEntity])],
   controllers: [AutorController],
   providers: [
     ListarAutorService,

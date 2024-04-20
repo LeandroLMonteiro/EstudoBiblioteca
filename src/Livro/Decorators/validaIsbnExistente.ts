@@ -1,5 +1,4 @@
 import {
-  ValidationArguments,
   ValidationOptions,
   ValidatorConstraint,
   registerDecorator,
@@ -12,20 +11,43 @@ import { LivroRepository } from '../repository/livro_repositorio';
 export class IsbnNaoExiste {
   constructor(private livroRepository: LivroRepository) {}
 
-  validate(value: any, validationArguments?: ValidationArguments): boolean {
+  validate(value: any): boolean {
     const isbnExiste = this.livroRepository.validaIsbnExistente(value);
     return !!isbnExiste;
   }
 }
 
 export const IsbnNaoExistente = (opcoesDeValidacao: ValidationOptions) => {
-  return (objeto: Object, propriedade: string) => {
+  return (objeto: object, propriedade: string) => {
     registerDecorator({
       target: objeto.constructor,
       propertyName: propriedade,
       options: opcoesDeValidacao,
       constraints: [],
       validator: IsbnNaoExiste,
+    });
+  };
+};
+
+@Injectable()
+@ValidatorConstraint({ async: false })
+export class IsbnExiste {
+  constructor(private livroRepository: LivroRepository) {}
+
+  validate(value: any): boolean {
+    const isbnExiste = this.livroRepository.validaIsbnExistente(value);
+    return !isbnExiste;
+  }
+}
+
+export const IsbnExistente = (opcoesDeValidacao: ValidationOptions) => {
+  return (objeto: object, propriedade: string) => {
+    registerDecorator({
+      target: objeto.constructor,
+      propertyName: propriedade,
+      options: opcoesDeValidacao,
+      constraints: [],
+      validator: IsbnExiste,
     });
   };
 };

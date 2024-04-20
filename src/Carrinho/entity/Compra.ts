@@ -1,4 +1,3 @@
-import { LivroDTO } from 'src/Livro/dto/livroDTO';
 import { FormaPagamento } from '../FormaPagamento';
 
 export type CompraEntity = {

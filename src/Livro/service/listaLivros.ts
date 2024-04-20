@@ -9,4 +9,9 @@ export class ListaLivroServices {
   async listarLivros(): Promise<LivroEntity[]> {
     return await this.livroRepository.listarTodos();
   }
+
+  async listarLivro(isbn: string): Promise<LivroEntity> {
+    const livro = await this.livroRepository.listarLivro(isbn);
+    return livro;
+  }
 }

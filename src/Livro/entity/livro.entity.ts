@@ -43,6 +43,10 @@ export class LivroEntity {
   @JoinColumn()
   categoriaId: string;
 
-  @ManyToOne(() => AutorEntity, (autor) => autor.id)
+  @ManyToOne(() => AutorEntity, (autor) => autor.id, {
+    orphanedRowAction: 'delete',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   autorId: string;
 }

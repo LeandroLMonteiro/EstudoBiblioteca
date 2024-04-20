@@ -6,6 +6,8 @@ import { PostgresConfigService } from './config/postgres.config.service';
 import { AutorModule } from './Autor/autor.module';
 import { LivroModule } from './Livro/livro.module';
 import { CategoriaModule } from './Categoria/categoria.module';
+import { APP_FILTER } from '@nestjs/core';
+import { FiltroDeExcecaoHttp } from './filtros/filtro-de-excecao-global';
 
 @Module({
   imports: [
@@ -19,6 +21,12 @@ import { CategoriaModule } from './Categoria/categoria.module';
       useClass: PostgresConfigService,
       inject: [PostgresConfigService],
     }),
+  ],
+  providers: [
+    {
+      provide: APP_FILTER,
+      useClass: FiltroDeExcecaoHttp,
+    },
   ],
 })
 export class AppModule {}

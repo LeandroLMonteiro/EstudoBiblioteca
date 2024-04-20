@@ -9,14 +9,15 @@ import {
   MinDate,
   MinLength,
 } from 'class-validator';
-import { Transform, Type } from 'class-transformer';
+import { Transform } from 'class-transformer';
 import { IsbnNaoExistente } from '../Decorators/validaIsbnExistente';
 import { CategoriaExistente } from '../Decorators/categoriaExistente';
 import { AutorExistente } from '../Decorators/autorExistente';
 import { validaPreco } from '../Decorators/verificaPrecoCategoria';
+import { PartialType } from '@nestjs/mapped-types';
 
 @Injectable()
-export class LivroDTO {
+export class CriaLivroDTO {
   @IsString()
   @MinLength(1, { message: 'Título não pode ser vazio' })
   titulo: string;
@@ -55,3 +56,6 @@ export class LivroDTO {
   @AutorExistente({ message: 'Autor inexistente' })
   autorNome: string;
 }
+
+@Injectable()
+export class AtualizaLivroDTO extends PartialType(CriaLivroDTO) {}
