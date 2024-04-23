@@ -7,7 +7,7 @@ import { AutorModule } from './Autor/autor.module';
 import { LivroModule } from './Livro/livro.module';
 import { CategoriaModule } from './Categoria/categoria.module';
 import { APP_FILTER } from '@nestjs/core';
-import { FiltroDeExcecaoHttp } from './filtros/filtro-de-excecao-global';
+import { FiltroDeExcecaoHttp } from './recursos/filtros/filtro-de-excecao-global';
 
 @Module({
   imports: [
