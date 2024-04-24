@@ -1,4 +1,4 @@
-import { UUID, randomUUID } from 'crypto';
+import { UUID } from 'crypto';
 import { UsuarioRepository } from '../repository/usuario_repositorio';
 import { Injectable } from '@nestjs/common';
 

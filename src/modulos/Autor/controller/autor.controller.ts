@@ -6,11 +6,14 @@ import {
   Param,
   Patch,
   Post,
+  UseGuards,
 } from '@nestjs/common';
 import { CriarAutorService } from '../service/criarAutorService';
 import { AtualizaAutorDTO, CriaAutorDTO } from '../dto/Autor';
 import { ListarAutorService } from '../service/listaAutores';
+import { AutenticacaoGuard } from '../../Autenticacao/autenticacao.guard';
 
+@UseGuards(AutenticacaoGuard)
 @Controller('autor')
 export class AutorController {
   constructor(

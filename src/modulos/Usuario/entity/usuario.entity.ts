@@ -1,3 +1,4 @@
+import { Exclude } from 'class-transformer';
 import { IsOptional } from 'class-validator';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
@@ -12,6 +13,7 @@ export class UsuarioEntity {
   @Column({ name: 'email', length: 150, nullable: false })
   email: string;
 
+  @Exclude()
   @Column({ name: 'senha', length: 255, nullable: false })
   senha: string;
 

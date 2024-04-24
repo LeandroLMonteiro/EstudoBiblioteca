@@ -4,11 +4,12 @@ import {
   IsInt,
   IsPhoneNumber,
   IsString,
+  Matches,
   MinLength,
 } from 'class-validator';
 
 @Injectable()
-export class UsuarioDTO {
+export class CriaUsuarioDTO {
   @IsString()
   primeiroNome: string;
 
@@ -17,6 +18,12 @@ export class UsuarioDTO {
 
   @IsEmail()
   email: string;
+
+  @Matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W+)(.{6,30})$/, {
+    message:
+      'A senha deve conter pelo menos uma letra minúscula, uma letra maiúscula, um dígito, um caractere especial e ter entre 8 e 30 caracteres',
+  })
+  senha: string;
 
   @IsPhoneNumber('BR')
   telefone: string;

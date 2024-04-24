@@ -13,12 +13,15 @@ import { CategoriaExiste } from './Decorators/categoriaExistente';
 import { IsbnExiste, IsbnNaoExiste } from './Decorators/validaIsbnExistente';
 import { ValidaPrecoCategoria } from './Decorators/verificaPrecoCategoria';
 import { LivroEntity } from './entity/livro.entity';
+import { AutenticacaoService } from '../Autenticacao/autenticacao.service';
+import { CustomLoggerModule } from '../logger/logger.module';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([LivroEntity]),
     CategoriaModule,
     AutorModule,
+    CustomLoggerModule,
   ],
   controllers: [LivroController],
   providers: [
@@ -30,6 +33,7 @@ import { LivroEntity } from './entity/livro.entity';
     CategoriaExiste,
     IsbnNaoExiste,
     ValidaPrecoCategoria,
+    AutenticacaoService,
   ],
   exports: [IsbnNaoExiste, IsbnExiste, ListaLivroServices],
 })

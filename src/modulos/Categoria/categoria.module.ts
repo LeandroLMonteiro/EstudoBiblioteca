@@ -7,6 +7,8 @@ import { CategoriaRepository } from './repository/categoria_repositorio';
 import { CategoriaService } from './service/cadastraCategoria';
 import { CategoriaDTO } from './dto/categoriaDTO';
 import { ValidadorCategoriaServices } from './service/validadorCategoria.sevices';
+import { AutenticacaoService } from '../Autenticacao/autenticacao.service';
+import { CustomLoggerModule } from '../logger/logger.module';
 
 @Module({
   imports: [TypeOrmModule.forFeature([CategoriaEntity])],
@@ -16,6 +18,8 @@ import { ValidadorCategoriaServices } from './service/validadorCategoria.sevices
     CategoriaRepository,
     CategoriaDTO,
     ValidadorCategoriaServices,
+    AutenticacaoService,
+    CustomLoggerModule,
   ],
   exports: [ValidadorCategoriaServices],
 })

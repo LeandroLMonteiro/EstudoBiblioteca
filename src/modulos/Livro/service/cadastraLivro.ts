@@ -3,8 +3,9 @@ import slugify from 'slugify';
 import { LivroEntity } from '../entity/livro.entity';
 import { CriaLivroDTO } from '../dto/livroDTO';
 import { LivroRepository } from '../repository/livro_repositorio';
-import { ValidarAutorService } from 'src/Autor/service/validadoresAutor.service';
-import { ValidadorCategoriaServices } from 'src/Categoria/service/validadorCategoria.sevices';
+import { ValidarAutorService } from '../../Autor/service/validadoresAutor.service';
+import { ValidadorCategoriaServices } from '../../Categoria/service/validadorCategoria.sevices';
+import { CustomLogger } from 'src/modulos/logger/custom-logger.service';
 
 @Injectable()
 export class CadastraLivroServices {
@@ -12,7 +13,10 @@ export class CadastraLivroServices {
     private livroRepository: LivroRepository,
     private readonly autorServices: ValidarAutorService,
     private readonly categoriaServices: ValidadorCategoriaServices,
-  ) {}
+    private readonly logger: CustomLogger,
+  ) {
+    this.logger.setContext('LivroController');
+  }
 
   async cadastraLivro(data: CriaLivroDTO): Promise<LivroEntity> {
     const autorId = await this.autorServices.retornaAutorIdPeloNome(
@@ -33,6 +37,8 @@ export class CadastraLivroServices {
     };
 
     await this.livroRepository.salvar(novoLivro);
+
+    this.logger.logColorido(novoLivro);
 
     return novoLivro;
   }

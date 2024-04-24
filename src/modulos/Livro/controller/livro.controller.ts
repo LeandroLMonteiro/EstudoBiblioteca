@@ -1,8 +1,10 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { CadastraLivroServices } from '../service/cadastraLivro';
 import { ListaLivroServices } from '../service/listaLivros';
 import { CriaLivroDTO } from '../dto/livroDTO';
+import { AutenticacaoGuard } from '../../Autenticacao/autenticacao.guard';
 
+@UseGuards(AutenticacaoGuard)
 @Controller('livro')
 export class LivroController {
   constructor(
