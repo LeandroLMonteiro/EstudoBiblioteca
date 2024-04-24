@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Param, Post } from '@nestjs/common';
 import { CarrinhoSevice } from '../service/carrinho';
 import { CarrinhoDTO } from '../dto/carrinhoDTO';
 import { CadastraCompraService } from '../service/cadastraCompra';
@@ -19,9 +19,8 @@ export class CarrinhoController {
   }
 
   @Delete('removeLivro/:id')
-  RemoveLivroCarrinho(@Param('id') id: string, @Body() data: CarrinhoDTO) {
-    const item = this.CarrinhoService.encontraLivroPeloIsbn(id);
-    return this.CarrinhoService.removeLivro(item);
+  RemoveLivroCarrinho(@Param('id') id: string) {
+    return this.CarrinhoService.removeLivro(id);
   }
 
   @Post('criaCompra/')

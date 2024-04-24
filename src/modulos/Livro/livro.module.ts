@@ -7,7 +7,7 @@ import { AutorModule } from '../Autor/autor.module';
 import { CategoriaModule } from '../Categoria/categoria.module';
 import { ListaLivroServices } from './service/listaLivros';
 import { CadastraLivroServices } from './service/cadastraLivro';
-import { LivroDTO } from './dto/livroDTO';
+import { CriaLivroDTO } from './dto/livroDTO';
 import { AutorExiste } from './Decorators/autorExistente';
 import { CategoriaExiste } from './Decorators/categoriaExistente';
 import { IsbnExiste, IsbnNaoExiste } from './Decorators/validaIsbnExistente';
@@ -25,7 +25,7 @@ import { LivroEntity } from './entity/livro.entity';
     CadastraLivroServices,
     ListaLivroServices,
     LivroRepository,
-    LivroDTO,
+    CriaLivroDTO,
     AutorExiste,
     CategoriaExiste,
     IsbnNaoExiste,

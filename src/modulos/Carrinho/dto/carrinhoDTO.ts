@@ -9,7 +9,7 @@ import {
 } from 'class-validator';
 import { validaUsuario } from '../decorators/validaUsuarioExiste';
 import { UUID } from 'crypto';
-import { IsbnExistente } from 'src/Livro/Decorators/validaIsbnExistente';
+import { IsbnExistente } from '../../Livro/Decorators/validaIsbnExistente';
 
 Injectable();
 export class ItemDTO {

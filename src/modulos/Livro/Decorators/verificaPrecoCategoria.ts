@@ -15,13 +15,13 @@ export class ValidaPrecoCategoria {
   async validate(value: any, validationArguments?: ValidationArguments) {
     return await this.livroService.verificaPrecoCategoria(
       value,
-      await validationArguments.object['categoria'],
+      await validationArguments!.object['categoria'],
     );
   }
 }
 
 export const validaPreco = (opcoesDeValidacao: ValidationOptions) => {
-  return (objeto: Object, propriedade: string) => {
+  return (objeto: object, propriedade: string) => {
     registerDecorator({
       target: objeto.constructor,
       propertyName: propriedade,

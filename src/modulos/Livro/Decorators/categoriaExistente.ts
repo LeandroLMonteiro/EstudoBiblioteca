@@ -6,13 +6,14 @@ import {
   registerDecorator,
 } from 'class-validator';
 import { Injectable } from '@nestjs/common';
-import { ValidadorCategoriaServices } from 'src/Categoria/service/validadorCategoria.sevices';
+import { ValidadorCategoriaServices } from '../../Categoria/service/validadorCategoria.sevices';
 
 @Injectable()
 @ValidatorConstraint({ async: true })
 export class CategoriaExiste implements ValidatorConstraintInterface {
   constructor(private categoriaServices: ValidadorCategoriaServices) {}
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async validate(value: string, validationArguments?: ValidationArguments) {
     const retorno =
       await this.categoriaServices.validaCategoriaExistente(value);
@@ -22,7 +23,7 @@ export class CategoriaExiste implements ValidatorConstraintInterface {
 }
 
 export const CategoriaExistente = (opcoesDeValidacao: ValidationOptions) => {
-  return (objeto: Object, propriedade: string) => {
+  return (objeto: object, propriedade: string) => {
     registerDecorator({
       target: objeto.constructor,
       propertyName: propriedade,

@@ -14,14 +14,14 @@ export class ValidaParcela {
 
   validate(value: any, validationArguments?: ValidationArguments): boolean {
     return this.compraRepositorio.verificaParcelas(
-      validationArguments.object['formaPagamento'],
+      validationArguments!.object['formaPagamento'],
       value,
     );
   }
 }
 
 export const validaParcela = (opcoesDeValidacao: ValidationOptions) => {
-  return (objeto: Object, propriedade: string) => {
+  return (objeto: object, propriedade: string) => {
     registerDecorator({
       target: objeto.constructor,
       propertyName: propriedade,

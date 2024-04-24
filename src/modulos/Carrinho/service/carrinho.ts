@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { CarrinhoDTO, ItemDTO } from '../dto/carrinhoDTO';
-import { ListaLivroServices } from 'src/Livro/service/listaLivros';
+import { ListaLivroServices } from '../../Livro/service/listaLivros';
 
 @Injectable()
 export class CarrinhoSevice {
@@ -41,11 +41,11 @@ export class CarrinhoSevice {
     this.carrinho.total = this.calculateTotaldoCarrinho(this.carrinho.items);
   }
 
-  async removeLivro(item: ItemDTO) {
-    const livro = await this.livroServices.listarLivro(item.isbn);
+  async removeLivro(isbn: string) {
+    const livro = await this.livroServices.listarLivro(isbn);
     if (livro) {
       this.carrinho.items.forEach(async (element) => {
-        if (element.isbn == item.isbn) {
+        if (element.isbn == isbn) {
           if (element.quantity - 1 > 0) {
             element.quantity -= 1;
             element.total = await this.calculaTotaldoItem(element);

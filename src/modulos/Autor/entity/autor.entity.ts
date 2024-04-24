@@ -1,4 +1,4 @@
-import { LivroEntity } from 'src/Livro/entity/livro.entity';
+import { LivroEntity } from '../../Livro/entity/livro.entity';
 import {
   Column,
   CreateDateColumn,

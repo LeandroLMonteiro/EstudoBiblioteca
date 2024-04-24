@@ -5,7 +5,7 @@ import {
   registerDecorator,
 } from 'class-validator';
 import { Injectable } from '@nestjs/common';
-import { ValidarAutorService } from 'src/Autor/service/validadoresAutor.service';
+import { ValidarAutorService } from '../../Autor/service/validadoresAutor.service';
 
 @Injectable()
 @ValidatorConstraint({ async: true })
@@ -14,6 +14,7 @@ export class AutorExiste {
 
   async validate(
     value: any,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     validationArguments?: ValidationArguments,
   ): Promise<boolean> {
     const resultado = await this.validaAutorService.validaAutorPeloNome(value);
@@ -22,7 +23,7 @@ export class AutorExiste {
 }
 
 export const AutorExistente = (opcoesDeValidacao: ValidationOptions) => {
-  return (objeto: Object, propriedade: string) => {
+  return (objeto: object, propriedade: string) => {
     registerDecorator({
       target: objeto.constructor,
       propertyName: propriedade,

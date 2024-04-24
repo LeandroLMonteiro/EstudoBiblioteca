@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { CadastraLivroServices } from '../service/cadastraLivro';
 import { ListaLivroServices } from '../service/listaLivros';
-import { LivroDTO } from '../dto/livroDTO';
+import { CriaLivroDTO } from '../dto/livroDTO';
 
 @Controller('livro')
 export class LivroController {
@@ -11,7 +11,7 @@ export class LivroController {
   ) {}
 
   @Post('criaLivro/')
-  adicionaLivro(@Body() data: LivroDTO) {
+  adicionaLivro(@Body() data: CriaLivroDTO) {
     return this.cadastraLivros.cadastraLivro(data);
   }
 
