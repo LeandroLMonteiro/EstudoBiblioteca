@@ -4,15 +4,15 @@ import {
   registerDecorator,
 } from 'class-validator';
 import { Injectable } from '@nestjs/common';
-import { ValidaUsuarioService } from '../../Usuario/service/validaUsuario.service';
+import { UsuarioService } from '../../Usuario/service/usuario.service';
 
 @Injectable()
 @ValidatorConstraint({ async: true })
 export class ValidaUsuario {
-  constructor(private validaUsuarioService: ValidaUsuarioService) {}
+  constructor(private usuarioService: UsuarioService) {}
 
   async validate(value: any): Promise<boolean> {
-    return await this.validaUsuarioService.verificaUsuario(value);
+    return await this.usuarioService.verificaUsuario(value);
   }
 }
 

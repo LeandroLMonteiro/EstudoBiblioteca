@@ -18,6 +18,7 @@ import { CacheModule } from '@nestjs/cache-manager';
 import { redisStore } from 'cache-manager-redis-yet';
 import { LoggerGlobalInterceptor } from './recursos/interceptores/logger-global.interceptor';
 import { CustomLogger } from './modulos/logger/custom-logger.service';
+import { CustomLoggerModule } from './modulos/logger/logger.module';
 
 @Module({
   imports: [
@@ -39,7 +40,7 @@ import { CustomLogger } from './modulos/logger/custom-logger.service';
       isGlobal: true,
     }),
     AutenticacaoModule,
-    CustomLogger,
+    CustomLoggerModule,
   ],
   providers: [
     {

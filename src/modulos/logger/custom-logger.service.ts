@@ -1,5 +1,5 @@
-import { ConsoleLogger, Injectable } from '@nestjs/common';
-import { bgMagenta, white } from 'colors';
+import { ConsoleLogger, HttpStatus, Injectable } from '@nestjs/common';
+import { bgMagenta, green, white } from 'colors';
 import { appendFileSync } from 'node:fs';
 
 @Injectable()
@@ -11,6 +11,15 @@ export class CustomLogger extends ConsoleLogger {
     const { nome, quantidadeDisponivel, valor } = produto;
     const logFormatado = this.formataLog(nome, quantidadeDisponivel, valor);
     console.log(bgMagenta(white(logFormatado)));
+  }
+  logObjeto(status, mensagem, objeto) {
+    if (status == HttpStatus.OK) {
+      console.log(green(mensagem));
+      console.log(objeto);
+    } else {
+      console.error(green(mensagem));
+      console.error(objeto);
+    }
   }
   logEmArquivo(produto) {
     const { nome, quantidadeDisponivel, valor } = produto;

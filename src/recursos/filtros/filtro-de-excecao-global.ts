@@ -16,26 +16,24 @@ export class FiltroDeExcecaoGlobal implements ExceptionFilter {
   ) {}
 
   catch(excecao: unknown, host: ArgumentsHost) {
-    this.loggerNativo.error(excecao);
-    console.error(excecao);
-
     const { httpAdapter } = this.adapterHost;
 
     const contexto = host.switchToHttp();
     const resposta = contexto.getResponse();
     const requisicao = contexto.getRequest();
-
-    if ('usuario' in requisicao) {
-      this.loggerNativo.log(
-        `Rota acessada pelo usuário ${requisicao.usuario.id}`,
-      );
-    }
+    const stackTrace = excecao instanceof Error ? excecao.stack : null;
 
     const { status, body } =
       excecao instanceof HttpException
         ? {
             status: excecao.getStatus(),
-            body: excecao.getResponse(),
+            body: {
+              statusCode: excecao.getStatus(),
+              timestamp: new Date().toISOString(),
+              path: httpAdapter.getRequestUrl(requisicao),
+              message: excecao.message,
+              response: excecao.getResponse(),
+            },
           }
         : {
             status: HttpStatus.INTERNAL_SERVER_ERROR,
@@ -43,9 +41,23 @@ export class FiltroDeExcecaoGlobal implements ExceptionFilter {
               statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
               timestamp: new Date().toISOString(),
               path: httpAdapter.getRequestUrl(requisicao),
+              message: 'Erro Interno no Servidor',
+              response: resposta,
             },
           };
 
     httpAdapter.reply(resposta, body, status);
+
+    if (status !== HttpStatus.OK) {
+      this.loggerNativo.error(
+        excecao instanceof HttpException ? excecao.getResponse() : excecao,
+        stackTrace,
+      );
+    } else {
+      this.loggerNativo.log(
+        excecao instanceof HttpException ? excecao.getResponse() : excecao,
+        contexto,
+      );
+    }
   }
 }

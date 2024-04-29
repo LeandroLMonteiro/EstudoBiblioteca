@@ -53,7 +53,7 @@ export class UsuarioEntity {
   @IsOptional()
   complemento: string;
 
-  @Column({ name: 'cep', length: 10, nullable: false })
+  @Column({ name: 'cep', length: 10, nullable: true })
   @IsOptional()
   cep: string;
 }

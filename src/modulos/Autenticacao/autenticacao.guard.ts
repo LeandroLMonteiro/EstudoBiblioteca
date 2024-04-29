@@ -28,7 +28,6 @@ export class AutenticacaoGuard implements CanActivate {
       const payload: UsuarioPayload = await this.jwtService.verifyAsync(token);
       requisicao.usuario = payload;
     } catch (error) {
-      console.error(error);
       throw new UnauthorizedException('JWT inválido');
     }
     return true;

@@ -1,13 +1,28 @@
-import { Injectable } from '@nestjs/common';
+import { HttpStatus, Injectable } from '@nestjs/common';
 import { CategoriaRepository } from '../repository/categoria_repositorio';
 import { CategoriaDTO } from '../dto/categoriaDTO';
+import { CustomLogger } from 'src/modulos/logger/custom-logger.service';
 
 @Injectable()
 export class CategoriaService {
-  constructor(private readonly categorias: CategoriaRepository) {}
+  constructor(
+    private readonly categorias: CategoriaRepository,
+    private readonly logger: CustomLogger,
+  ) {
+    this.logger.setContext('CategoriaController');
+  }
 
   async cadastraCategoria(data: CategoriaDTO) {
-    return await this.categorias.salvar(data);
+    try {
+      const categoriaSalva = await this.categorias.salvar(data);
+      const mensagem = 'Categoria adicionada com êxito';
+      this.logger.logObjeto(HttpStatus.OK, mensagem, categoriaSalva);
+      return data;
+    } catch (ex) {
+      this.logger.logObjeto(ex.status, ex.message, data);
+    }
+
+    return data;
   }
 
   async listaCategoria(): Promise<CategoriaDTO[]> {

@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, forwardRef } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { ListarAutorService } from './service/listaAutores';
@@ -9,11 +9,14 @@ import { emailNotExistente } from './decorators/email-existente';
 import { ValidarAutorService } from './service/validadoresAutor.service';
 import { AutorEntity } from './entity/autor.entity';
 import { LivroModule } from '../Livro/livro.module';
-import { AutenticacaoService } from '../Autenticacao/autenticacao.service';
 import { CustomLoggerModule } from '../logger/logger.module';
 
 @Module({
-  imports: [LivroModule, TypeOrmModule.forFeature([AutorEntity])],
+  imports: [
+    forwardRef(() => LivroModule),
+    TypeOrmModule.forFeature([AutorEntity]),
+    CustomLoggerModule,
+  ],
   controllers: [AutorController],
   providers: [
     ListarAutorService,
@@ -21,8 +24,6 @@ import { CustomLoggerModule } from '../logger/logger.module';
     AutorRepositorio,
     emailNotExistente,
     ValidarAutorService,
-    AutenticacaoService,
-    CustomLoggerModule,
   ],
   exports: [ValidarAutorService],
 })

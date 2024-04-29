@@ -1,24 +1,23 @@
 import { Module } from '@nestjs/common';
 import { UsuarioController } from './controller/Usuario.Controller';
-import { UsuarioService } from './service/cadastraUsuario';
+import { UsuarioService } from './service/usuario.service';
 import { UsuarioRepository } from './repository/usuario_repositorio';
 import { CriaUsuarioDTO } from './dto/CriaUsuario.dto';
-import { ValidaUsuarioService } from './service/validaUsuario.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsuarioEntity } from './entity/usuario.entity';
-import { AutenticacaoService } from '../Autenticacao/autenticacao.service';
-import { CustomLoggerModule } from '../logger/logger.module';
+import { AtualizaUsuarioDTO } from './dto/AtualizaUsuario.dto';
+import { ListaUsuarioDTO } from './dto/ListaUsuario.dto';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([UsuarioEntity]), CustomLoggerModule],
+  imports: [TypeOrmModule.forFeature([UsuarioEntity])],
   controllers: [UsuarioController],
   providers: [
     UsuarioRepository,
     CriaUsuarioDTO,
-    ValidaUsuarioService,
-    AutenticacaoService,
+    AtualizaUsuarioDTO,
+    ListaUsuarioDTO,
     UsuarioService,
   ],
-  exports: [ValidaUsuarioService, UsuarioService],
+  exports: [UsuarioService],
 })
 export class UsuarioModule {}

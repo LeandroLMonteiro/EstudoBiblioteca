@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
-import { AutenticacaoService } from './autenticacao.service';
 import { AutenticacaoController } from './autenticacao.controller';
-import { UsuarioModule } from '../usuario/usuario.module';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
-import { CustomLoggerModule } from '../logger/logger.module';
+import { UsuarioModule } from '../usuario/usuario.module';
+import { AutenticacaoService } from './autenticacao.service';
+import { AutenticaDTO } from './dto/autentica.dto';
 
 @Module({
   imports: [
@@ -19,9 +19,8 @@ import { CustomLoggerModule } from '../logger/logger.module';
       inject: [ConfigService],
       global: true,
     }),
-    CustomLoggerModule,
   ],
   controllers: [AutenticacaoController],
-  providers: [AutenticacaoService],
+  providers: [AutenticaDTO, AutenticacaoService],
 })
 export class AutenticacaoModule {}

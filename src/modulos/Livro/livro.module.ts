@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, forwardRef } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { LivroController } from './controller/livro.controller';
@@ -13,14 +13,13 @@ import { CategoriaExiste } from './Decorators/categoriaExistente';
 import { IsbnExiste, IsbnNaoExiste } from './Decorators/validaIsbnExistente';
 import { ValidaPrecoCategoria } from './Decorators/verificaPrecoCategoria';
 import { LivroEntity } from './entity/livro.entity';
-import { AutenticacaoService } from '../Autenticacao/autenticacao.service';
 import { CustomLoggerModule } from '../logger/logger.module';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([LivroEntity]),
     CategoriaModule,
-    AutorModule,
+    forwardRef(() => AutorModule),
     CustomLoggerModule,
   ],
   controllers: [LivroController],
@@ -33,8 +32,13 @@ import { CustomLoggerModule } from '../logger/logger.module';
     CategoriaExiste,
     IsbnNaoExiste,
     ValidaPrecoCategoria,
-    AutenticacaoService,
+    IsbnExiste,
   ],
-  exports: [IsbnNaoExiste, IsbnExiste, ListaLivroServices],
+  exports: [
+    IsbnNaoExiste,
+    IsbnExiste,
+    ListaLivroServices,
+    CadastraLivroServices,
+  ],
 })
 export class LivroModule {}

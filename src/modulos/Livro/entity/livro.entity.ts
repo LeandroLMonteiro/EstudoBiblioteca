@@ -7,8 +7,8 @@ import {
   PrimaryColumn,
 } from 'typeorm';
 
-import { AutorEntity } from 'src/Autor/entity/autor.entity';
-import { CategoriaEntity } from 'src/Categoria/entity/categoria.entity';
+import { AutorEntity } from '../../Autor/entity/autor.entity';
+import { CategoriaEntity } from '../../Categoria/entity/categoria.entity';
 
 @Entity({ name: 'livros' })
 export class LivroEntity {

@@ -9,8 +9,6 @@ import { CarrinhoDTO } from './dto/carrinhoDTO';
 import { CompraDTO } from './dto/compraDTO';
 import { ValidaUsuario } from './decorators/validaUsuarioExiste';
 import { UsuarioModule } from '../Usuario/usuario.module';
-import { AutenticacaoService } from '../Autenticacao/autenticacao.service';
-import { CustomLoggerModule } from '../logger/logger.module';
 
 @Module({
   imports: [LivroModule, UsuarioModule],
@@ -23,8 +21,6 @@ import { CustomLoggerModule } from '../logger/logger.module';
     CarrinhoDTO,
     CompraDTO,
     ValidaUsuario,
-    AutenticacaoService,
-    CustomLoggerModule,
   ],
 })
 export class CarrinhoModule {}

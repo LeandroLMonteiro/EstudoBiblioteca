@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpStatus, Injectable } from '@nestjs/common';
 import slugify from 'slugify';
 import { LivroEntity } from '../entity/livro.entity';
 import { CriaLivroDTO } from '../dto/livroDTO';
@@ -36,9 +36,14 @@ export class CadastraLivroServices {
       categoriaId,
     };
 
-    await this.livroRepository.salvar(novoLivro);
-
-    this.logger.logColorido(novoLivro);
+    try {
+      await this.livroRepository.salvar(novoLivro);
+      const mensagem = 'Livro adicionado com êxito';
+      this.logger.logObjeto(HttpStatus.OK, mensagem, novoLivro);
+      return novoLivro;
+    } catch (ex) {
+      this.logger.logObjeto(ex.status, ex.message, novoLivro);
+    }
 
     return novoLivro;
   }
