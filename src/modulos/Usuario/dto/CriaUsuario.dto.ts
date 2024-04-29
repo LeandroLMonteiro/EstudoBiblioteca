@@ -1,7 +1,8 @@
-import { Injectable, Optional } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import {
   IsEmail,
   IsInt,
+  IsOptional,
   IsPhoneNumber,
   IsString,
   Matches,
@@ -25,41 +26,49 @@ export class CriaUsuarioDTO {
   })
   senha: string;
 
+  @IsOptional()
   @IsPhoneNumber('BR')
   telefone: string;
 
+  @IsOptional()
   @IsString()
   cpf: string;
 
+  @IsOptional()
   @IsString()
   @MinLength(3)
   country: string;
 
+  @IsOptional()
   @IsString()
   @MinLength(2)
   estado: string;
 
+  @IsOptional()
   @IsString()
   @MinLength(3)
   cidade: string;
 
+  @IsOptional()
   @IsString()
   @MinLength(3)
   bairro: string;
 
   @IsString()
   @MinLength(3)
+  @IsOptional()
   endereco: string;
 
   @IsInt()
-  @Optional()
+  @IsOptional()
   number: number;
 
   @IsString()
   @MinLength(3)
-  @Optional()
+  @IsOptional()
   complemento: string;
 
   @IsString()
+  @IsOptional()
   cep: string;
 }

@@ -10,10 +10,9 @@ export class HashSenhaPipe implements PipeTransform {
     const sal = this.configService.get<string>('SAL_SENHA');
     try {
       const senhaHasheada = await bcrypt.hash(senha, sal!);
-      console.log(senhaHasheada);
       return senhaHasheada;
     } catch (ex) {
-      console.log(ex);
+      console.error(ex);
     }
   }
 }

@@ -1,15 +1,33 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  HttpStatus,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { ListaUsuarioDTO } from '../dto/ListaUsuario.dto';
 import { AtualizaUsuarioDTO } from '../dto/AtualizaUsuario.dto';
 import { CriaUsuarioDTO } from '../dto/CriaUsuario.dto';
 import { UsuarioRepository } from '../repository/usuario_repositorio';
+import { CustomLogger } from 'src/modulos/logger/custom-logger.service';
 
 @Injectable()
 export class UsuarioService {
-  constructor(private readonly usuarioRepository: UsuarioRepository) {}
+  constructor(
+    private readonly usuarioRepository: UsuarioRepository,
+    private readonly logger: CustomLogger,
+  ) {
+    this.logger.setContext('UsuarioController');
+  }
 
   async criaUsuario(dadosDoUsuario: CriaUsuarioDTO) {
-    return this.usuarioRepository.salvar(dadosDoUsuario);
+    const usuarioExiste = await this.buscaPorEmail(dadosDoUsuario.email);
+    if (!usuarioExiste) {
+      const usuarioSalvo = await this.usuarioRepository.salvar(dadosDoUsuario);
+      this.logger.logObjeto(HttpStatus.OK, 'Usuario Cadastrado', usuarioSalvo);
+      return usuarioSalvo;
+    } else {
+      throw new BadRequestException('Usuario já cadastrado previamente');
+    }
   }
 
   async listUsuarios() {

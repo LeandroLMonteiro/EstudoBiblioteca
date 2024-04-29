@@ -23,7 +23,7 @@ export class UsuarioRepository {
     };
 
     Object.assign(usuarioEntity, novoUsuario);
-    await this.usuarioRepository.save(novoUsuario);
+    return await this.usuarioRepository.save(novoUsuario);
   }
 
   async atualizar(usuario: UsuarioEntity, novosDados: AtualizaUsuarioDTO) {
