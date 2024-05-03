@@ -1,4 +1,8 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { UsuarioService } from '../usuario/service/usuario.service';
@@ -17,6 +21,9 @@ export class AutenticacaoService {
 
   async login(email: string, senhaInserida: string) {
     const usuario = await this.usuarioService.buscaPorEmail(email);
+    if (!usuario) {
+      throw new NotFoundException('Email não localizado.');
+    }
     //const usuarioFoiAutenticado = await bcrypt.compare(
     //  senhaInserida,
     //  usuario.senha,

@@ -1,7 +1,7 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { CategoriaRepository } from '../repository/categoria_repositorio';
 import { CategoriaDTO } from '../dto/categoriaDTO';
-import { CustomLogger } from 'src/modulos/logger/custom-logger.service';
+import { CustomLogger } from '../../logger/custom-logger.service';
 
 @Injectable()
 export class CategoriaService {

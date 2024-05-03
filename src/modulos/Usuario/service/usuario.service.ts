@@ -8,7 +8,8 @@ import { ListaUsuarioDTO } from '../dto/ListaUsuario.dto';
 import { AtualizaUsuarioDTO } from '../dto/AtualizaUsuario.dto';
 import { CriaUsuarioDTO } from '../dto/CriaUsuario.dto';
 import { UsuarioRepository } from '../repository/usuario_repositorio';
-import { CustomLogger } from 'src/modulos/logger/custom-logger.service';
+import { CustomLogger } from '../../logger/custom-logger.service';
+import { UsuarioEntity } from '../entity/usuario.entity';
 
 @Injectable()
 export class UsuarioService {
@@ -23,7 +24,10 @@ export class UsuarioService {
     const usuarioExiste = await this.buscaPorEmail(dadosDoUsuario.email);
     if (!usuarioExiste) {
       const usuarioSalvo = await this.usuarioRepository.salvar(dadosDoUsuario);
-      this.logger.logObjeto(HttpStatus.OK, 'Usuario Cadastrado', usuarioSalvo);
+      const usuarioLog: Omit<UsuarioEntity, 'senha'> = {
+        ...usuarioSalvo,
+      };
+      this.logger.logObjeto(HttpStatus.OK, 'Usuario Cadastrado', usuarioLog);
       return usuarioSalvo;
     } else {
       throw new BadRequestException('Usuario já cadastrado previamente');
@@ -42,12 +46,7 @@ export class UsuarioService {
   }
 
   async buscaPorEmail(email: string) {
-    const checkEmail = await this.usuarioRepository.buscaPorEmail(email);
-
-    if (checkEmail === null)
-      throw new NotFoundException('O email não foi encontrado.');
-
-    return checkEmail;
+    return await this.usuarioRepository.buscaPorEmail(email);
   }
 
   async atualizaUsuario(id: string, novosDados: AtualizaUsuarioDTO) {

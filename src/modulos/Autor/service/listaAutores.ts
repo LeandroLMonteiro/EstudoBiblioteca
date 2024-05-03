@@ -2,7 +2,7 @@ import { AutorEntity } from '../entity/autor.entity';
 import { HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
 import { AutorRepositorio } from '../repository/autor_repositorio';
 import { ListaAutorLivrosDTO } from '../dto/Autor';
-import { CustomLogger } from 'src/modulos/logger/custom-logger.service';
+import { CustomLogger } from '../../logger/custom-logger.service';
 
 @Injectable()
 export class ListarAutorService {
