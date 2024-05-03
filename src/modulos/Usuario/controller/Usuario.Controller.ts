@@ -13,6 +13,7 @@ import { CriaUsuarioDTO } from '../dto/CriaUsuario.dto';
 import { AutenticacaoGuard } from '../../Autenticacao/autenticacao.guard';
 import { HashSenhaPipe } from '../../../recursos/pipes/hash-senha.pipe';
 import { AtualizaUsuarioDTO } from '../dto/AtualizaUsuario.dto';
+import { UsuarioEntity } from '../entity/usuario.entity';
 
 @Controller('usuario')
 export class UsuarioController {
@@ -27,7 +28,8 @@ export class UsuarioController {
       ...data,
       senha: senhaComHash,
     });
-    return usuarioCriado;
+    const usuarioRetornar: Omit<UsuarioEntity, 'senha'> = { ...usuarioCriado };
+    return usuarioRetornar;
   }
 
   @UseGuards(AutenticacaoGuard)

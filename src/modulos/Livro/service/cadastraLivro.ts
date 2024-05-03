@@ -5,7 +5,7 @@ import { CriaLivroDTO } from '../dto/livroDTO';
 import { LivroRepository } from '../repository/livro_repositorio';
 import { ValidarAutorService } from '../../Autor/service/validadoresAutor.service';
 import { ValidadorCategoriaServices } from '../../Categoria/service/validadorCategoria.sevices';
-import { CustomLogger } from 'src/modulos/logger/custom-logger.service';
+import { CustomLogger } from '../../logger/custom-logger.service';
 
 @Injectable()
 export class CadastraLivroServices {

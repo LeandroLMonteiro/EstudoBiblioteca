@@ -1,5 +1,5 @@
-import { LivroRepository } from '../repository/livro_repositorio.js';
-import { LivroEntity } from '../entity/livro.entity.js';
+import { LivroRepository } from '../repository/livro_repositorio';
+import { LivroEntity } from '../entity/livro.entity';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
