@@ -77,4 +77,18 @@ export class AutorRepositorio {
 
     return nomeLocalizado.id;
   }
+
+  async ObtemNomeAutor(id: string): Promise<string> {
+    let nomeAutor: string = '';
+    const autorLocalizado = await this.autorRepository
+      .createQueryBuilder('autor')
+      .where('autor.id = :id', { id: id })
+      .getOne();
+
+    if (autorLocalizado) {
+      nomeAutor = autorLocalizado.nome;
+    }
+
+    return nomeAutor;
+  }
 }
