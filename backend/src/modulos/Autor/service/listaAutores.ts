@@ -17,6 +17,10 @@ export class ListarAutorService {
     return await this.autorRepositorio.listarTodos();
   }
 
+  async obtemNomeAutor(id: string): Promise<string> {
+    return this.obtemNomeAutor(id);
+  }
+
   async listarAutorLivros(id: string) {
     const autorLivrosSalvos = await this.autorRepositorio.listarAutor(id);
     if (autorLivrosSalvos === null) {

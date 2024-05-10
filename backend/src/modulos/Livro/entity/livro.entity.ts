@@ -1,14 +1,6 @@
-import {
-  Column,
-  Entity,
-  JoinColumn,
-  ManyToOne,
-  OneToOne,
-  PrimaryColumn,
-} from 'typeorm';
-
 import { AutorEntity } from '../../Autor/entity/autor.entity';
 import { CategoriaEntity } from '../../Categoria/entity/categoria.entity';
+import { Column, Entity, ManyToOne, OneToOne, PrimaryColumn } from 'typeorm';
 
 @Entity({ name: 'livros' })
 export class LivroEntity {
@@ -40,13 +32,10 @@ export class LivroEntity {
   data: Date;
 
   @OneToOne(() => CategoriaEntity, (categoria) => categoria.slug)
-  @JoinColumn()
+  @Column({ name: 'categoriaIdSlug', nullable: false })
   categoriaId: string;
 
-  @ManyToOne(() => AutorEntity, (autor) => autor.id, {
-    orphanedRowAction: 'delete',
-    onDelete: 'CASCADE',
-    onUpdate: 'CASCADE',
-  })
+  //@ManyToOne(() => AutorEntity, (autor) => autor.id)
+  @Column({ name: 'autorId', nullable: false })
   autorId: string;
 }

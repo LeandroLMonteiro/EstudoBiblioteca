@@ -36,6 +36,11 @@ export class AutorController {
     return await this.listarAutorService.listarAutorLivros(id);
   }
 
+  @Get('nome/:id')
+  async obtemNomeAutor(@Param('id') id: string) {
+    return await this.listarAutorService.obtemNomeAutor(id);
+  }
+
   @Patch(':id')
   async atualizaAutor(
     @Param('id') id: string,

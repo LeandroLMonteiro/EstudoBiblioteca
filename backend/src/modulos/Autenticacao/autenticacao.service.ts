@@ -3,7 +3,7 @@ import {
   NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
-import * as bcrypt from 'bcrypt';
+/*import * as bcrypt from 'bcrypt';*/
 import { JwtService } from '@nestjs/jwt';
 import { UsuarioService } from '../usuario/service/usuario.service';
 
@@ -24,10 +24,10 @@ export class AutenticacaoService {
     if (!usuario) {
       throw new NotFoundException('Email não localizado.');
     }
-    //const usuarioFoiAutenticado = await bcrypt.compare(
-    //  senhaInserida,
-    //  usuario.senha,
-    //);
+    /*const usuarioFoiAutenticado = await bcrypt.compare(
+      senhaInserida,
+      usuario.senha,
+    );*/
 
     const usuarioFoiAutenticado = senhaInserida === usuario.senha;
 

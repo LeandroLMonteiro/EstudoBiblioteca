@@ -4,7 +4,7 @@ import { ListaLivroServices } from '../service/listaLivros';
 import { CriaLivroDTO } from '../dto/livroDTO';
 import { AutenticacaoGuard } from '../../Autenticacao/autenticacao.guard';
 
-@UseGuards(AutenticacaoGuard)
+//@UseGuards(AutenticacaoGuard)
 @Controller('livro')
 export class LivroController {
   constructor(
@@ -21,4 +21,10 @@ export class LivroController {
   listarLivros() {
     return this.livros.listarLivros();
   }
+
+  @Get('listaLivro')
+  listarLivro(isbn: string) {
+    return this.livros.listarLivro(isbn);
+  }
+
 }
