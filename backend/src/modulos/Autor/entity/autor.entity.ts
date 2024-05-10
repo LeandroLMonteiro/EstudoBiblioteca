@@ -24,9 +24,6 @@ export class AutorEntity {
   @CreateDateColumn({ name: 'dataCriacao' })
   dataCriacao: Date;
 
-  @OneToMany(() => LivroEntity, (livro) => livro.isbn, {
-    cascade: true,
-    eager: true,
-  })
+  //@OneToMany(() => LivroEntity, (livro) => livro.isbn)
   livros: LivroEntity[];
 }

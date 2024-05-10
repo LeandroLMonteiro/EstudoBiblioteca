@@ -15,8 +15,9 @@ export class LivroRepository {
     return await this.livroRepository.save(novoLivro);
   }
 
-  async listarTodos() {
-    return await this.livroRepository.find();
+  async listarTodos(): Promise<LivroEntity[]> {
+    const retorno = await this.livroRepository.find();
+    return retorno;
   }
 
   async validaIsbnExistente(isbn: string): Promise<boolean> {
