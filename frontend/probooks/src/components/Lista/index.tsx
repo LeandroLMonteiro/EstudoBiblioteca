@@ -1,20 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ILivro } from '../../types/livro';
 import Item from './Item';
 import style from './Lista.module.scss';
 
 interface Props {
-  livros: ILivro[],
-  selecionaLivro: (livroSelecionado: ILivro) => void 
+  livros: ILivro[]
 }
 
-function Lista({ livros, selecionaLivro }: Props) {
+function Lista({ livros }: Props) {
   return (
     <aside className={style.listaLivros}>
       <ul>
         {livros.map(item => (
           <Item
-            selecionaLivro={selecionaLivro}
             key={item.isbn}
             {...item}
           />

@@ -1,22 +1,41 @@
-import React, { useState } from 'react';
-import Lista from './components/Lista';
-import { ILivro } from './types/livro';
+import React, { useEffect, useState } from 'react';
+import Lista from '../components/Lista';
+import { ILivro } from '../types/livro';
 import style from './App.module.scss';
-import logo from './logo.svg';
-import Botao from './components/Botao';
+import logo from '../logo.svg';
+import Botao from '../components/Botao';
 
 function App() {
   const [livros, setLivros] = useState<ILivro[]>([]);
-  const [selecionado, setSelecionado] = useState<ILivro>();
   const [jaCarregouLivros, setJaCarregouLivros] = useState(false);
 
-  function selecionaLivro(livroSelecionado: ILivro) {
-    setLivros(livrosAnteriores => livrosAnteriores.map(livro => ({
-      ...livro,
-      selecionado: livro.isbn === livroSelecionado.isbn ? true : false
-    })))
-    setSelecionado(livroSelecionado);
+  const livrosKey = 'livros-key';
+  
+  const leDadosSessionStorage = (chave: string) => {
+    try {
+
+      const dados = sessionStorage.getItem(chave);
+      if (dados) {
+        const dadosParseados = JSON.parse(dados);
+        return dadosParseados ?? null;
+      }
+
+    } catch (error) {
+
+      console.error('sem acesso ao sessionStorage');
+    }
+    
+    return null;
+
   }
+
+  useEffect(() => {
+    const dadosLivros = leDadosSessionStorage(livrosKey)
+    if (dadosLivros) {
+      setLivros(dadosLivros);
+      setJaCarregouLivros(true);
+    }
+  },[]);
 
   const requisicaoLivros = 'http://localhost:3000/livro/listaLivros';
   const opcoesLivros = {
@@ -37,8 +56,16 @@ function App() {
           return res.json();
         })
         .then((data) => {
-          setLivros(data);
+
+          const novosLivros = data.map((livro: ILivro[]) => ({ selecionado: false, ...livro}))
+          
+          setLivros(novosLivros);
           setJaCarregouLivros(true);
+          try {
+            sessionStorage.setItem(livrosKey, JSON.stringify(novosLivros));
+          } catch (error) {
+            console.error('não foi possível escrever no sessionStorage');
+          }
         })
         .catch(error => {
           setJaCarregouLivros(false);
@@ -64,7 +91,7 @@ function App() {
     <form className={style.Formulario}>
         {jaCarregouLivros && livros.length === 0 && <h3>Nenhum livro foi encontrado!</h3>}
         {!jaCarregouLivros && <h3>Clique no botão para carregar os livros</h3>}
-        {jaCarregouLivros && <Lista livros={livros} selecionaLivro={selecionaLivro} />}
+        {jaCarregouLivros && <Lista livros={livros} />}
     </form></>
   );
 }
