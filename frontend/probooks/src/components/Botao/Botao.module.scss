@@ -1,5 +1,5 @@
 .botao {
-  flex-direction: column;
+  flex-direction: row;
   align-self: center;
   background-color: #88bcd1;
   border-radius: 30%;
@@ -7,6 +7,7 @@
   color: #272626;
   cursor: pointer;
   width: 2%;
+  text-align: center;
   &:active {
     background-color: #7CA6B7;
     box-shadow: 2% 2% 4% #0000009F inset;
