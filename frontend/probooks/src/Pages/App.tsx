@@ -1,16 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Lista from '../components/Lista';
 import { ILivro } from '../types/livro';
 import style from './App.module.scss';
 import logo from '../logo.svg';
 import Botao from '../components/Botao';
+import { useNavigate } from 'react-router-dom';
 
 function App() {
   const [livros, setLivros] = useState<ILivro[]>([]);
   const [jaCarregouLivros, setJaCarregouLivros] = useState(false);
-
+  
+  const navigate = useNavigate();
   const livrosKey = 'livros-key';
   
+
   const leDadosSessionStorage = (chave: string) => {
     try {
 
@@ -46,6 +49,10 @@ function App() {
         //'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjE3MWY5YThhLTgyMTYtNGVjZS05OTkxLWRkZTE2YTExNGM0MSIsIm5vbWVVc3VhcmlvIjoidGVzdGUiLCJpYXQiOjE3MTQzOTY1OTEsImV4cCI6MTcxNDY1NTc5MX0.LFWarKMF7qJc7Yi5S1NCbAmRssseqmnP4s1AXkRHc1Q'
       }
     }
+  
+  function verCarrinho() {
+    navigate('/carrinho');
+  }
 
   function carregaLivros () {
     fetch(requisicaoLivros, opcoesLivros)
@@ -86,6 +93,9 @@ function App() {
       <td></td>
       <Botao type="submit" onClick={carregaLivros}>
         Lista os Livros
+      </Botao>
+      <Botao type="submit" onClick={verCarrinho}>
+        Ver Carrinho
       </Botao>
     </div>
     <form className={style.Formulario}>

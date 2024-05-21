@@ -1,3 +1,19 @@
+.voltar {
+  flex-direction: row;
+  align-self: center;
+  background-color: #88bcd1;
+  border-radius: 30%;
+  box-shadow: 2% 4% 4% #0000009F;
+  color: red;
+  cursor: pointer;
+  text-align: center;
+  &:active {
+    background-color: #7CA6B7;
+    box-shadow: 2% 2% 4% #0000009F inset;
+  }
+}
+
+
 .botao {
   flex-direction: row;
   align-self: center;
@@ -6,7 +22,6 @@
   box-shadow: 2% 4% 4% #0000009F;
   color: #272626;
   cursor: pointer;
-  width: 2%;
   text-align: center;
   &:active {
     background-color: #7CA6B7;
@@ -17,7 +32,14 @@
 @media screen and (min-width: 1280px) {
   .botao {
     grid-column-start: span 2;
-    width: 10%;
-    font-size: 150%;
+    content: normal;
+    width: min-content;
+    font-size: 25px;
+  }
+  .voltar {
+    grid-column-start: span 2;
+    content: normal;
+    width: min-content;
+    font-size: 25px;
   }
 }
