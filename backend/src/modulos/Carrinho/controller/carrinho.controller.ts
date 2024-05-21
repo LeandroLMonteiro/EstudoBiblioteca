@@ -1,9 +1,9 @@
-import { Body, Controller, Delete, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { CarrinhoSevice } from '../service/carrinho';
-import { CarrinhoDTO } from '../dto/carrinhoDTO';
 import { CadastraCompraService } from '../service/cadastraCompra';
 import { CompraDTO } from '../dto/compraDTO';
 import { UUID } from 'crypto';
+import { ItemDTO } from '../dto/carrinhoDTO';
 
 @Controller('carrinho')
 export class CarrinhoController {
@@ -12,10 +12,14 @@ export class CarrinhoController {
     private readonly cadastrarCompraService: CadastraCompraService,
   ) {}
 
-  @Post('adicionaLivro/:id')
-  AdicionaLivroCarrinho(@Param('id') id: UUID, @Body() data: CarrinhoDTO) {
-    data.idUsuario = id;
-    return this.CarrinhoService.adicionaLivro;
+  @Get()
+  ListaCarrinho() {
+    return this.CarrinhoService.listCarrinho();
+  }
+
+  @Post('adicionaLivro')
+  AdicionaLivroCarrinho(/* @Param('id') id: UUID, */ @Body() data: ItemDTO) {
+    return this.CarrinhoService.adicionaLivro(data);
   }
 
   @Delete('removeLivro/:id')

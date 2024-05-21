@@ -14,7 +14,7 @@ export class CadastraCompraService {
     parcelas: number,
   ): CompraEntity {
     const novaCompra: CompraEntity = {
-      idUsuario: carrinho.idUsuario,
+      /* idUsuario: carrinho.idUsuario, */
       //items: [],
       total: carrinho.total,
       formaPagamento: formaPagamento,

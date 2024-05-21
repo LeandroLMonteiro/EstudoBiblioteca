@@ -4,6 +4,8 @@ import {
   IsArray,
   IsInt,
   IsNumber,
+  IsOptional,
+  IsString,
   IsUUID,
   ValidateNested,
 } from 'class-validator';
@@ -14,25 +16,25 @@ import { IsbnExistente } from '../../Livro/Decorators/validaIsbnExistente';
 Injectable();
 export class ItemDTO {
   @IsbnExistente({ message: 'ISBN não cadastrado' })
+  @IsString()
   isbn: string;
 
   @IsInt()
+  @IsOptional()
   quantity: number;
 
   @IsNumber()
+  @IsOptional()
   total: number;
 }
 
 Injectable();
 export class CarrinhoDTO {
-  @IsUUID()
-  id: string;
-
-  @IsUUID()
-  @validaUsuario({ message: 'Usuario inexistente' })
-  idUsuario: UUID;
+/*   @IsUUID()
+  id: string; */
 
   @IsNumber()
+  @IsOptional()
   total: number;
 
   @ValidateNested()

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ILivro } from '../../types/livro';
 import Item from './Item';
 import style from './Lista.module.scss';

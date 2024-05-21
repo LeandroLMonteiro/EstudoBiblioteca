@@ -1,7 +1,7 @@
 import { FormaPagamento } from '../FormaPagamento';
 
 export type CompraEntity = {
-  idUsuario: string;
+  // idUsuario: string;
   //items: LivroDTO[],
   total: number;
   formaPagamento: FormaPagamento;

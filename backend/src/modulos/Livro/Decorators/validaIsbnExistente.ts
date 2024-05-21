@@ -30,13 +30,13 @@ export const IsbnNaoExistente = (opcoesDeValidacao: ValidationOptions) => {
 };
 
 @Injectable()
-@ValidatorConstraint({ async: false })
+@ValidatorConstraint({ async: true })
 export class IsbnExiste {
   constructor(private livroRepository: LivroRepository) {}
 
-  validate(value: any): boolean {
-    const isbnExiste = this.livroRepository.validaIsbnExistente(value);
-    return !isbnExiste;
+  async validate(value: any): Promise<boolean> {
+    const isbnExiste = await this.livroRepository.validaIsbnExistente(value);
+    return isbnExiste;
   }
 }
 

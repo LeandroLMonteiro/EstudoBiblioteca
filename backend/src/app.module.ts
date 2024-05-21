@@ -19,6 +19,7 @@ import { redisStore } from 'cache-manager-redis-yet';
 import { LoggerGlobalInterceptor } from './recursos/interceptores/logger-global.interceptor';
 import { CustomLogger } from './modulos/logger/custom-logger.service';
 import { CustomLoggerModule } from './modulos/logger/logger.module';
+import { CarrinhoModule } from './modulos/Carrinho/carrinho.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { CustomLoggerModule } from './modulos/logger/logger.module';
     CategoriaModule,
     LivroModule,
     UsuarioModule,
+    CarrinhoModule,
     ConfigModule.forRoot({
       isGlobal: true,
     }),

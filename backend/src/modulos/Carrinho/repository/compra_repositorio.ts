@@ -14,12 +14,12 @@ export class CompraRepositorio {
     return this.compras;
   }
 
-  encontraCompraDoUsuario(idUsuario: string) {
+/*   encontraCompraDoUsuario(idUsuario: string) {
     return this.compras.find((usuario) => {
       usuario.idUsuario === idUsuario;
     });
   }
-
+ */
   verificaParcelas(formaPagamento: FormaPagamento, parcelas: number): boolean {
     return (
       (formaPagamento == FormaPagamento.D && parcelas == 1) ||

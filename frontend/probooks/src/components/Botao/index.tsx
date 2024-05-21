@@ -3,16 +3,17 @@ import style from './Botao.module.scss';
 
 interface Props {
   type?: "button" | "submit" | "reset" | undefined,
-  onClick?: () => void,
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void,
   children?: React.ReactNode
+  id?:string;
 }
 
-function Botao({ onClick, type, children }: Props) {
+function Botao({ onClick, id, type, children }: Props) {
   return (
     <button
-      onClick={onClick}
+      onClick={onClick} 
       type={type}
-      className={style.botao}
+      className={ id==="voltar" ? style.voltar : style.botao}
     >
       {children}
     </button>

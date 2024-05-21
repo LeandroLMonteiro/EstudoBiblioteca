@@ -9,6 +9,6 @@ export interface ILivro {
   data: Date;
   categoriaId: string;
   autorId: string; // usar ValidarAutorService.retornaNomeAutor
-  selecionado: boolean
-
+  selecionado: boolean;
+  comprado: number;
 }

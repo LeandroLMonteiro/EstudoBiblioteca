@@ -22,8 +22,8 @@ function Detalhe() {
                 <td></td>
                 <td></td>
                 <td></td>
-                <Botao type="submit" onClick={() => navigate('/', { state: { livro } })}>
-                   {'<'} Voltar
+                <Botao id="voltar" type="submit" onClick={() => navigate('/', { state: { livro } })}>
+                   Voltar
                 </Botao>
               </div>
               <form className={styles.formulario}>
